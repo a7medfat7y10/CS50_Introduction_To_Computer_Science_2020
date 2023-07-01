@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<!-- saved from url=(0041)https://cs50.harvard.edu/x/2021/notes/ai/ -->
+<html lang="en-us" class="wf-ptsans-n7-active wf-ptsans-n4-active wf-active"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><meta property="og:description" content="Harvard University&#39;s introduction to the intellectual enterprises of computer science and the art of programming.">
+
+        <meta property="og:image" content="https://img.youtube.com/vi/zYierUhIFNQ/maxresdefault.jpg"><meta property="og:title" content="Artificial Intelligence - CS50x 2021">
+
+        <link href="https://cs50.harvard.edu/x/2021/favicon.ico?1630960824" rel="icon">
+
+        <!-- https://fonts.google.com/specimen/PT+Sans?query=PT+Sans&selection.family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700 -->
+        <script src="./Artificial Intelligence - CS50x 2021_files/webfont.js.download"></script>
+
+        <!-- http://getbootstrap.com/docs/4.6/getting-started/introduction/ -->
+        <script src="./Artificial Intelligence - CS50x 2021_files/jquery.min.js.download"></script>
+        <script src="./Artificial Intelligence - CS50x 2021_files/bootstrap.bundle.min.js.download"></script>
+
+        <!-- https://bootstrap-table.com/docs/getting-started/introduction/ -->
+        <link href="./Artificial Intelligence - CS50x 2021_files/bootstrap-table.min.css" rel="stylesheet">
+        <script src="./Artificial Intelligence - CS50x 2021_files/bootstrap-table.min.js.download"></script>
+        <script src="./Artificial Intelligence - CS50x 2021_files/bootstrap-table-mobile.min.js.download"></script>
+
+        <!-- https://fontawesome.com/how-to-use/on-the-web/referencing-icons/basic-use -->
+        <link href="./Artificial Intelligence - CS50x 2021_files/all.min.css" rel="stylesheet">
+
+        <!-- https://moment.github.io/luxon/ -->
+        <script src="./Artificial Intelligence - CS50x 2021_files/luxon.min.js.download"></script>
+
+        <!-- http://docs.mathjax.org/ -->
+        <!-- https://www.jsdelivr.com/package/npm/mathjax?path=es5 -->
+        <script crossorigin="anonymous" integrity="sha256-+nfSJ1LiSvANSK3wvi6FjM+oFwoIQvURU1frozp5z6o=" src="./Artificial Intelligence - CS50x 2021_files/tex-chtml.js.download"></script><style type="text/css">.CtxtMenu_InfoClose {  top:.2em; right:.2em;}
+.CtxtMenu_InfoContent {  overflow:auto; text-align:left; font-size:80%;  padding:.4em .6em; border:1px inset; margin:1em 0px;  max-height:20em; max-width:30em; background-color:#EEEEEE;  white-space:normal;}
+.CtxtMenu_Info.CtxtMenu_MousePost {outline:none;}
+.CtxtMenu_Info {  position:fixed; left:50%; width:auto; text-align:center;  border:3px outset; padding:1em 2em; background-color:#DDDDDD;  color:black;  cursor:default; font-family:message-box; font-size:120%;  font-style:normal; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 15px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius:15px;               /* Safari and Chrome */  -moz-border-radius:15px;                  /* Firefox */  -khtml-border-radius:15px;                /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */  filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color="gray", Positive="true"); /* IE */}
+</style><style type="text/css">.CtxtMenu_MenuClose {  position:absolute;  cursor:pointer;  display:inline-block;  border:2px solid #AAA;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  font-family: "Courier New", Courier;  font-size:24px;  color:#F0F0F0}
+.CtxtMenu_MenuClose span {  display:block; background-color:#AAA; border:1.5px solid;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  line-height:0;  padding:8px 0 6px     /* may need to be browser-specific */}
+.CtxtMenu_MenuClose:hover {  color:white!important;  border:2px solid #CCC!important}
+.CtxtMenu_MenuClose:hover span {  background-color:#CCC!important}
+.CtxtMenu_MenuClose:hover:focus {  outline:none}
+</style><style type="text/css">.CtxtMenu_Menu {  position:absolute;  background-color:white;  color:black;  width:auto; padding:5px 0px;  border:1px solid #CCCCCC; margin:0; cursor:default;  font: menu; text-align:left; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 5px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius: 5px;             /* Safari and Chrome */  -moz-border-radius: 5px;                /* Firefox */  -khtml-border-radius: 5px;              /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */}
+.CtxtMenu_MenuItem {  padding: 1px 2em;  background:transparent;}
+.CtxtMenu_MenuArrow {  position:absolute; right:.5em; padding-top:.25em; color:#666666;  font-family: null; font-size: .75em}
+.CtxtMenu_MenuActive .CtxtMenu_MenuArrow {color:white}
+.CtxtMenu_MenuArrow.CtxtMenu_RTL {left:.5em; right:auto}
+.CtxtMenu_MenuCheck {  position:absolute; left:.7em;  font-family: null}
+.CtxtMenu_MenuCheck.CtxtMenu_RTL { right:.7em; left:auto }
+.CtxtMenu_MenuRadioCheck {  position:absolute; left: .7em;}
+.CtxtMenu_MenuRadioCheck.CtxtMenu_RTL {  right: .7em; left:auto}
+.CtxtMenu_MenuInputBox {  padding-left: 1em; right:.5em; color:#666666;  font-family: null;}
+.CtxtMenu_MenuInputBox.CtxtMenu_RTL {  left: .1em;}
+.CtxtMenu_MenuComboBox {  left:.1em; padding-bottom:.5em;}
+.CtxtMenu_MenuSlider {  left: .1em;}
+.CtxtMenu_SliderValue {  position:absolute; right:.1em; padding-top:.25em; color:#333333;  font-size: .75em}
+.CtxtMenu_SliderBar {  outline: none; background: #d3d3d3}
+.CtxtMenu_MenuLabel {  padding: 1px 2em 3px 1.33em;  font-style:italic}
+.CtxtMenu_MenuRule {  border-top: 1px solid #DDDDDD;  margin: 4px 3px;}
+.CtxtMenu_MenuDisabled {  color:GrayText}
+.CtxtMenu_MenuActive {  background-color: #606872;  color: white;}
+.CtxtMenu_MenuDisabled:focus {  background-color: #E8E8E8}
+.CtxtMenu_MenuLabel:focus {  background-color: #E8E8E8}
+.CtxtMenu_ContextMenu:focus {  outline:none}
+.CtxtMenu_ContextMenu .CtxtMenu_MenuItem:focus {  outline:none}
+.CtxtMenu_SelectionMenu {  position:relative; float:left;  border-bottom: none; -webkit-box-shadow:none; -webkit-border-radius:0px; }
+.CtxtMenu_SelectionItem {  padding-right: 1em;}
+.CtxtMenu_Selection {  right: 40%; width:50%; }
+.CtxtMenu_SelectionBox {  padding: 0em; max-height:20em; max-width: none;  background-color:#FFFFFF;}
+.CtxtMenu_SelectionDivider {  clear: both; border-top: 2px solid #000000;}
+.CtxtMenu_Menu .CtxtMenu_MenuClose {  top:-10px; left:-10px}
+</style>
+
+        <!-- https://github.com/verlok/vanilla-lazyload -->
+        <script src="./Artificial Intelligence - CS50x 2021_files/intersection-observer.js.download"></script>
+        <script src="./Artificial Intelligence - CS50x 2021_files/lazyload.min.js.download"></script>
+
+        <!-- https://github.com/davidjbradshaw/iframe-resizer -->
+        <!-- https://www.jsdelivr.com/package/npm/iframe-resizer?path=js -->
+        <script crossorigin="anonymous" integrity="sha256-S8f0Q/V9VcfrqYgWo9EFS9zuDMdPTBMC+CBW0RjxQbs=" src="./Artificial Intelligence - CS50x 2021_files/iframeResizer.min.js.download"></script>
+
+        <!-- https://github.com/scratchblocks/scratchblocks -->
+        <script src="./Artificial Intelligence - CS50x 2021_files/scratchblocks-v3.5.2-min.js.download"></script><style><![CDATA[ .sb-label {
+      font-family: Lucida Grande, Verdana, Arial, DejaVu Sans, sans-serif;
+      font-weight: bold;
+      fill: #fff;
+      font-size: 10px;
+      word-spacing: +1px;
+    }
+
+    .sb-obsolete { fill: #d42828; }
+    .sb-motion { fill: #4a6cd4; }
+    .sb-looks { fill: #8a55d7; }
+    .sb-sound { fill: #bb42c3; }
+    .sb-pen { fill: #0e9a6c;  }
+    .sb-events { fill: #c88330; }
+    .sb-control { fill: #e1a91a; }
+    .sb-sensing { fill: #2ca5e2; }
+    .sb-operators { fill: #5cb712; }
+    .sb-variables { fill: #ee7d16; }
+    .sb-list { fill: #cc5b22 }
+    .sb-custom { fill: #632d99; }
+    .sb-custom-arg { fill: #5947b1; }
+    .sb-extension { fill: #4b4a60; }
+    .sb-grey { fill: #969696; }
+
+    .sb-bevel {
+      filter: url(#bevelFilter);
+    }
+
+    .sb-input {
+      filter: url(#inputBevelFilter);
+    }
+    .sb-input-number,
+    .sb-input-string,
+    .sb-input-number-dropdown {
+      fill: #fff;
+    }
+    .sb-literal-number,
+    .sb-literal-string,
+    .sb-literal-number-dropdown,
+    .sb-literal-dropdown {
+      font-weight: normal;
+      font-size: 9px;
+      word-spacing: 0;
+    }
+    .sb-literal-number,
+    .sb-literal-string,
+    .sb-literal-number-dropdown {
+      fill: #000;
+    }
+
+    .sb-darker {
+      filter: url(#inputDarkFilter);
+    }
+
+    .sb-outline {
+      stroke: #fff;
+      stroke-opacity: 0.2;
+      stroke-width: 2;
+      fill: none;
+    }
+
+    .sb-define-hat-cap {
+      stroke: #632d99;
+      stroke-width: 1;
+      fill: #8e2ec2;
+    }
+
+    .sb-comment {
+      fill: #ffffa5;
+      stroke: #d0d1d2;
+      stroke-width: 1;
+    }
+    .sb-comment-line {
+      fill: #ffff80;
+    }
+    .sb-comment-label {
+      font-family: Helevetica, Arial, DejaVu Sans, sans-serif;
+      font-weight: bold;
+      fill: #5c5d5f;
+      word-spacing: 0;
+      font-size: 12px;
+    }
+
+    .sb-diff {
+      fill: none;
+      stroke: #000;
+    }
+    .sb-diff-ins {
+      stroke-width: 2px;
+    }
+    .sb-diff-del {
+      stroke-width: 3px;
+    }
+  ]]></style><style><![CDATA[ .sb3-label {
+      font: 500 12pt Helevetica Neue, Helvetica, sans-serif;
+      fill: #fff;
+      word-spacing: +1pt;
+    }
+
+    .sb3-motion { fill: #4c97ff; stroke: #3373cc; }
+    .sb3-motion-alt { fill: #4280d7; }
+    .sb3-motion-dark { fill: #4c97ff; }
+    .sb3-looks { fill: #9966ff; stroke: #774dcb; }
+    .sb3-looks-alt { fill: #855cd6; }
+    .sb3-looks-dark { fill: #bd42bd; }
+    .sb3-sound { fill: #cf63cf; stroke: #bd42bd; }
+    .sb3-sound-alt { fill: #c94fc9; }
+    .sb3-sound-dark { fill: #bd42bd; }
+    .sb3-control { fill: #ffab19; stroke: #cf8b17; }
+    .sb3-control-alt { fill: #ec9c13; }
+    .sb3-control-dark { fill: #cf8b17; }
+    .sb3-events { fill: #ffbf00; stroke: #cc9900; }
+    .sb3-events-alt { fill: #e6ac00; }
+    .sb3-events-dark { fill: #cc9900; }
+    .sb3-sensing { fill: #5cb1d6; stroke: #2e8eb8; }
+    .sb3-sensing-alt { fill: #47a8d1; }
+    .sb3-sensing-dark { fill: #2e8eb8; }
+    .sb3-operators { fill: #59c059; stroke: #389438; }
+    .sb3-operators-alt { fill: #46b946; }
+    .sb3-operators-dark { fill: #389438; }
+    .sb3-variables { fill: #ff8c1a; stroke: #db6e00; }
+    .sb3-variables-alt { fill: #ff8000; }
+    .sb3-variables-dark { fill: #db6e00; }
+    .sb3-list { fill: #ff661a; stroke: #e64d00; }
+    .sb3-list-alt { fill: #ff5500; }
+    .sb3-list-dark { fill: #e64d00; }
+    .sb3-custom { fill: #ff6680; stroke: #ff3355; }
+    .sb3-custom-alt { fill: #ff4d6a; }
+    .sb3-custom-dark { fill: #ff3355; }
+    .sb3-custom-arg { fill: #ff6680; stroke: #ff3355; }
+
+    /* extension blocks, e.g. pen */
+    .sb3-extension { fill: #0fbd8c; stroke: #0b8e69; }
+    .sb3-extension-alt { fill: #0da57a; }
+    .sb3-extension-line { stroke: #0da57a; }
+    .sb3-extension-dark { fill: #0b8e69; }
+
+    /* obsolete colors: chosen by hand, indicates invalid blocks */
+    .sb3-obsolete { fill: #ed4242; stroke: #ca2b2b; }
+    .sb3-obsolete-alt { fill: #db3333; }
+    .sb3-obsolete-dark { fill: #ca2b2b; }
+
+    /* grey: special color from the Scratch 3.0 design mockups */
+    .sb3-grey { fill: #bfbfbf; stroke: #909090; }
+    .sb3-grey-alt { fill: #b2b2b2; }
+    .sb3-grey-dark { fill: #909090; }
+
+    .sb3-input-color {
+      stroke: #fff;
+    }
+
+    .sb3-input-number,
+    .sb3-input-string {
+      fill: #fff;
+    }
+    .sb3-literal-number,
+    .sb3-literal-string,
+    .sb3-literal-number-dropdown,
+    .sb3-literal-dropdown {
+      word-spacing: 0;
+    }
+    .sb3-literal-number,
+    .sb3-literal-string {
+      fill: #575e75;
+    }
+
+    .sb3-comment {
+      fill: #ffffa5;
+      stroke: #d0d1d2;
+      stroke-width: 1;
+    }
+    .sb3-comment-line {
+      fill: #ffff80;
+    }
+    .sb3-comment-label {
+      font: 400 12pt Helevetica Neue, Helvetica, sans-serif;
+      fill: #000;
+      word-spacing: 0;
+    }
+
+    .sb3-diff {
+      fill: none;
+      stroke: #000;
+    }
+    .sb3-diff-ins {
+      stroke-width: 2px;
+    }
+    .sb3-diff-del {
+      stroke-width: 3px;
+    }
+  ]]></style>
+
+        
+
+        <link href="./Artificial Intelligence - CS50x 2021_files/page.css" rel="stylesheet">
+        <link rel="stylesheet" href="./Artificial Intelligence - CS50x 2021_files/css" media="all"><script src="./Artificial Intelligence - CS50x 2021_files/jekyll-theme-cs50.js.download"></script>
+
+        <script>
+            window.CS50 = {
+                locale: "en",
+                tz: "America/New_York"
+            };
+        </script>
+
+        <title>Artificial Intelligence - CS50x 2021</title>
+
+
+    <style id="MJX-CHTML-styles">
+mjx-container[jax="CHTML"] {
+  line-height: 0;
+}
+
+mjx-container [space="1"] {
+  margin-left: .111em;
+}
+
+mjx-container [space="2"] {
+  margin-left: .167em;
+}
+
+mjx-container [space="3"] {
+  margin-left: .222em;
+}
+
+mjx-container [space="4"] {
+  margin-left: .278em;
+}
+
+mjx-container [space="5"] {
+  margin-left: .333em;
+}
+
+mjx-container [rspace="1"] {
+  margin-right: .111em;
+}
+
+mjx-container [rspace="2"] {
+  margin-right: .167em;
+}
+
+mjx-container [rspace="3"] {
+  margin-right: .222em;
+}
+
+mjx-container [rspace="4"] {
+  margin-right: .278em;
+}
+
+mjx-container [rspace="5"] {
+  margin-right: .333em;
+}
+
+mjx-container [size="s"] {
+  font-size: 70.7%;
+}
+
+mjx-container [size="ss"] {
+  font-size: 50%;
+}
+
+mjx-container [size="Tn"] {
+  font-size: 60%;
+}
+
+mjx-container [size="sm"] {
+  font-size: 85%;
+}
+
+mjx-container [size="lg"] {
+  font-size: 120%;
+}
+
+mjx-container [size="Lg"] {
+  font-size: 144%;
+}
+
+mjx-container [size="LG"] {
+  font-size: 173%;
+}
+
+mjx-container [size="hg"] {
+  font-size: 207%;
+}
+
+mjx-container [size="HG"] {
+  font-size: 249%;
+}
+
+mjx-container [width="full"] {
+  width: 100%;
+}
+
+mjx-box {
+  display: inline-block;
+}
+
+mjx-block {
+  display: block;
+}
+
+mjx-itable {
+  display: inline-table;
+}
+
+mjx-row {
+  display: table-row;
+}
+
+mjx-row > * {
+  display: table-cell;
+}
+
+mjx-mtext {
+  display: inline-block;
+}
+
+mjx-mstyle {
+  display: inline-block;
+}
+
+mjx-merror {
+  display: inline-block;
+  color: red;
+  background-color: yellow;
+}
+
+mjx-mphantom {
+  visibility: hidden;
+}
+
+mjx-assistive-mml {
+  position: absolute !important;
+  top: 0px;
+  left: 0px;
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 1px 0px 0px 0px !important;
+  border: 0px !important;
+  display: block !important;
+  width: auto !important;
+  overflow: hidden !important;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+mjx-assistive-mml[display="block"] {
+  width: 100% !important;
+}
+
+mjx-math {
+  display: inline-block;
+  text-align: left;
+  line-height: 0;
+  text-indent: 0;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 100%;
+  font-size-adjust: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  word-spacing: normal;
+  white-space: nowrap;
+  direction: ltr;
+  padding: 1px 0;
+}
+
+mjx-container[jax="CHTML"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="CHTML"][display="true"][width="full"] {
+  display: flex;
+}
+
+mjx-container[jax="CHTML"][display="true"] mjx-math {
+  padding: 0;
+}
+
+mjx-container[jax="CHTML"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="CHTML"][justify="right"] {
+  text-align: right;
+}
+
+mjx-mn {
+  display: inline-block;
+  text-align: left;
+}
+
+mjx-msup {
+  display: inline-block;
+  text-align: left;
+}
+
+mjx-mover {
+  display: inline-block;
+  text-align: left;
+}
+
+mjx-mover:not([limits="false"]) {
+  padding-top: .1em;
+}
+
+mjx-mover:not([limits="false"]) > * {
+  display: block;
+  text-align: left;
+}
+
+mjx-TeXAtom {
+  display: inline-block;
+  text-align: left;
+}
+
+mjx-c {
+  display: inline-block;
+}
+
+mjx-utext {
+  display: inline-block;
+  padding: .75em 0 .2em 0;
+}
+
+mjx-c::before {
+  display: block;
+  width: 0;
+}
+
+.MJX-TEX {
+  font-family: MJXZERO, MJXTEX;
+}
+
+.TEX-B {
+  font-family: MJXZERO, MJXTEX-B;
+}
+
+.TEX-I {
+  font-family: MJXZERO, MJXTEX-I;
+}
+
+.TEX-MI {
+  font-family: MJXZERO, MJXTEX-MI;
+}
+
+.TEX-BI {
+  font-family: MJXZERO, MJXTEX-BI;
+}
+
+.TEX-S1 {
+  font-family: MJXZERO, MJXTEX-S1;
+}
+
+.TEX-S2 {
+  font-family: MJXZERO, MJXTEX-S2;
+}
+
+.TEX-S3 {
+  font-family: MJXZERO, MJXTEX-S3;
+}
+
+.TEX-S4 {
+  font-family: MJXZERO, MJXTEX-S4;
+}
+
+.TEX-A {
+  font-family: MJXZERO, MJXTEX-A;
+}
+
+.TEX-C {
+  font-family: MJXZERO, MJXTEX-C;
+}
+
+.TEX-CB {
+  font-family: MJXZERO, MJXTEX-CB;
+}
+
+.TEX-FR {
+  font-family: MJXZERO, MJXTEX-FR;
+}
+
+.TEX-FRB {
+  font-family: MJXZERO, MJXTEX-FRB;
+}
+
+.TEX-SS {
+  font-family: MJXZERO, MJXTEX-SS;
+}
+
+.TEX-SSB {
+  font-family: MJXZERO, MJXTEX-SSB;
+}
+
+.TEX-SSI {
+  font-family: MJXZERO, MJXTEX-SSI;
+}
+
+.TEX-SC {
+  font-family: MJXZERO, MJXTEX-SC;
+}
+
+.TEX-T {
+  font-family: MJXZERO, MJXTEX-T;
+}
+
+.TEX-V {
+  font-family: MJXZERO, MJXTEX-V;
+}
+
+.TEX-VB {
+  font-family: MJXZERO, MJXTEX-VB;
+}
+
+mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
+  font-family: MJXZERO, MJXTEX-S1, MJXTEX-S4, MJXTEX, MJXTEX-A ! important;
+}
+
+@font-face /* 0 */ {
+  font-family: MJXZERO;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_Zero.woff") format("woff");
+}
+
+@font-face /* 1 */ {
+  font-family: MJXTEX;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_Main-Regular.woff") format("woff");
+}
+
+@font-face /* 2 */ {
+  font-family: MJXTEX-B;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_Main-Bold.woff") format("woff");
+}
+
+@font-face /* 3 */ {
+  font-family: MJXTEX-I;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_Math-Italic.woff") format("woff");
+}
+
+@font-face /* 4 */ {
+  font-family: MJXTEX-MI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_Main-Italic.woff") format("woff");
+}
+
+@font-face /* 5 */ {
+  font-family: MJXTEX-BI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_Math-BoldItalic.woff") format("woff");
+}
+
+@font-face /* 6 */ {
+  font-family: MJXTEX-S1;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_Size1-Regular.woff") format("woff");
+}
+
+@font-face /* 7 */ {
+  font-family: MJXTEX-S2;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_Size2-Regular.woff") format("woff");
+}
+
+@font-face /* 8 */ {
+  font-family: MJXTEX-S3;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_Size3-Regular.woff") format("woff");
+}
+
+@font-face /* 9 */ {
+  font-family: MJXTEX-S4;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_Size4-Regular.woff") format("woff");
+}
+
+@font-face /* 10 */ {
+  font-family: MJXTEX-A;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_AMS-Regular.woff") format("woff");
+}
+
+@font-face /* 11 */ {
+  font-family: MJXTEX-C;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Regular.woff") format("woff");
+}
+
+@font-face /* 12 */ {
+  font-family: MJXTEX-CB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Bold.woff") format("woff");
+}
+
+@font-face /* 13 */ {
+  font-family: MJXTEX-FR;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Regular.woff") format("woff");
+}
+
+@font-face /* 14 */ {
+  font-family: MJXTEX-FRB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Bold.woff") format("woff");
+}
+
+@font-face /* 15 */ {
+  font-family: MJXTEX-SS;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Regular.woff") format("woff");
+}
+
+@font-face /* 16 */ {
+  font-family: MJXTEX-SSB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Bold.woff") format("woff");
+}
+
+@font-face /* 17 */ {
+  font-family: MJXTEX-SSI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Italic.woff") format("woff");
+}
+
+@font-face /* 18 */ {
+  font-family: MJXTEX-SC;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_Script-Regular.woff") format("woff");
+}
+
+@font-face /* 19 */ {
+  font-family: MJXTEX-T;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_Typewriter-Regular.woff") format("woff");
+}
+
+@font-face /* 20 */ {
+  font-family: MJXTEX-V;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Regular.woff") format("woff");
+}
+
+@font-face /* 21 */ {
+  font-family: MJXTEX-VB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Bold.woff") format("woff");
+}
+
+mjx-c.mjx-c30::before {
+  padding: 0.666em 0.5em 0.022em 0;
+  content: "0";
+}
+
+mjx-c.mjx-c31::before {
+  padding: 0.666em 0.5em 0 0;
+  content: "1";
+}
+
+mjx-c.mjx-c32::before {
+  padding: 0.666em 0.5em 0 0;
+  content: "2";
+}
+
+mjx-c.mjx-c39::before {
+  padding: 0.666em 0.5em 0.022em 0;
+  content: "9";
+}
+</style></head>
+
+    <body class="" cz-shortcut-listen="true">
+
+        <div class="alert fixed-top mb-0 rounded-0 shadow alert-success alert-dismissible" data-alert="success dismissible" data-hash="14c26b7088b495629d13e2eb6186501b" id="alert" role="alert">
+            <button aria-label="Close" class="btn-close" data-bs-dismiss="alert" type="button"></button><p>Interested in <a href="https://cs50.harvard.edu/x/2021/#how-to-take-this-course" class="alert-link">a verified certificate, a professional certificate, or transfer credit and accreditation</a>?
+And get vaccinated (as soon as it’s available to you). 💉 <a href="https://www.who.int/news-room/q-a-detail/coronavirus-disease-(covid-19)-vaccines" class="alert-link">Here’s why</a>. <a href="https://www.google.com/search?q=covid-19+vaccine+finder" class="alert-link">Here’s how</a>.</p></div>
+        
+
+        <div class="container-fluid">
+
+            <div class="row">
+
+                <aside class="col-md" style="height: 638px; top: 58px;">
+ 
+                    <header><h1 data-id="this-is-cs50x"><a href="https://cs50.harvard.edu/x/2021/">This is CS50x</a></h1>
+
+<p>OpenCourseWare</p>
+
+<p><a class="pr-1 small" href="https://cs50.harvard.edu/donate">Donate<i aria-hidden="true" class="fas fa-external-link-alt ps-2"></i></a></p>
+
+<p><a href="https://cs.harvard.edu/malan/">David J. Malan</a>
+<br>
+<a href="mailto:malan@harvard.edu">malan@harvard.edu</a>
+<br>
+<a class="mr-1" href="https://www.facebook.com/dmalan"><i aria-hidden="true" class="fab fa-facebook-f" title="Facebook"></i><span class="sr-only">Facebook</span></a>
+<a class="mr-1" href="https://github.com/dmalan"><i aria-hidden="true" class="fab fa-github" title="GitHub"></i><span class="sr-only">GitHub</span></a>
+<a class="mr-1" href="https://www.instagram.com/davidjmalan/"><i aria-hidden="true" class="fab fa-instagram" title="Instagram"></i><span class="sr-only">Instagram</span></a>
+<a class="mr-1" href="https://www.linkedin.com/in/malan/"><i aria-hidden="true" class="fab fa-linkedin" title="LinkedIn"></i><span class="sr-only">LinkedIn</span></a>
+<a class="mr-1" href="https://orcid.org/0000-0001-5338-2522"><i aria-hidden="true" class="fab fa-orcid" title="ORCID"></i><span class="sr-only">ORCID</span></a>
+<a class="mr-1" href="https://www.quora.com/profile/David-J-Malan"><i aria-hidden="true" class="fab fa-quora" title="Quora"></i><span class="sr-only">Quora</span></a>
+<a class="mr-1" href="https://www.reddit.com/user/davidjmalan"><i aria-hidden="true" class="fab fa-reddit-alien" title="Reddit"></i><span class="sr-only">Reddit</span></a>
+<a class="mr-1" href="https://twitter.com/davidjmalan"><i aria-hidden="true" class="fab fa-twitter" title="Twitter"></i><span class="sr-only">Twitter</span></a></p></header>
+
+                    
+
+                    <button aria-controls="nav" aria-expanded="false" class="btn btn-sm collapsed d-md-none" data-bs-target="aside &gt; nav" data-bs-toggle="collapse">
+                        Menu
+                    </button>
+
+                    <nav class="collapse d-md-block" id="nav"><hr>
+
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.ly/zoom/"><i class="fas fa-video pe-2"></i>Zoom Meetings</a></li>
+</ul>
+
+<hr>
+
+<ul class="small fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.harvard.edu/x/2021/workshop/">CS50 Educator Workshop 2021</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.harvard.edu/x/2021/seminars/">CS50’s New Year’s Seminars<span aria-hidden="true" class="ps-2 text-decoration-none">🥂</span></a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.harvard.edu/x/2021/gallery/">Gallery of Final Projects<span aria-hidden="true" class="ps-2 text-decoration-none">🖼️ </span></a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.harvard.edu/x/2021/new/">What’s new for 2021?</a></li>
+</ul>
+
+<hr>
+
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.harvard.edu/x/2021/weeks/0/">Week 0</a> Scratch</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.harvard.edu/x/2021/weeks/1/">Week 1</a> C</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.harvard.edu/x/2021/weeks/2/">Week 2</a> Arrays</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.harvard.edu/x/2021/weeks/3/">Week 3</a> Algorithms</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.harvard.edu/x/2021/weeks/4/">Week 4</a> Memory</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.harvard.edu/x/2021/weeks/5/">Week 5</a> Data Structures</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.harvard.edu/x/2021/weeks/6/">Week 6</a> Python</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.harvard.edu/x/2021/weeks/7/">Week 7</a> SQL</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.harvard.edu/x/2021/weeks/8/">Week 8</a> HTML, CSS, JavaScript</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.harvard.edu/x/2021/weeks/9/">Week 9</a> Flask</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.harvard.edu/x/2021/weeks/10/">Week 10</a> Ethics</li>
+</ul>
+<ul class="fa-ul">
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.harvard.edu/x/2021/weeks/security/">Security</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.harvard.edu/x/2021/weeks/ai/">Artificial Intelligence</a></li>
+</ul>
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.harvard.edu/x/2021/project/">Final Project</a></li>
+</ul>
+
+<hr>
+
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.harvard.edu/x/2021/honesty/">Academic Honesty</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.harvard.edu/x/2021/certificate/">CS50 Certificate</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.harvard.edu/x/2021/faqs/">FAQs</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.me/cs50x">Gradebook</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.harvard.edu/x/2021/staff/">Staff</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.harvard.edu/x/2021/syllabus/">Syllabus</a></li>
+</ul>
+
+<hr>
+
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.edx.org/ed">Ed Discussion</a> for Q&amp;A</li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://us.edstem.org/quickstart/ed-discussion.pdf">Quick Start Guide</a></li>
+</ul>
+
+<hr>
+
+<ul class="small fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.edx.org/">edX</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://www.youtube.com/playlist?list=PLhQjrBD2T382_R182iC2gNZI9HzWFMC_8">YouTube</a></li>
+</ul>
+
+<hr>
+
+<ul class="small fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://ide.cs50.io/">CS50 IDE</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://www.w3schools.com/css/">CSS Tutorial</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://flask.palletsprojects.com/en/1.1.x/quickstart/">Flask Quickstart</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://www.w3schools.com/html/">HTML Tutorial</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://jinja.palletsprojects.com/en/2.11.x/templates/">Jinja Template Designer Documentation</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://man.cs50.io/">Manual Pages</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://docs.python.org/3.7/search.html">Python Documentation</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://scratch.mit.edu/">Scratch</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://www.w3schools.com/sql/">SQL Tutorial</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.readthedocs.io/style/c/">Style Guide</a></li>
+</ul>
+
+<hr>
+
+<ul class="small fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.noticeable.news/">Changelog</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.statuspage.io/">Status Page</a></li>
+</ul>
+
+<hr>
+
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.harvard.edu/x/2021/communities/"><strong>Communities</strong></a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://www.clubhouse.com/club/cs50">Clubhouse</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://discord.gg/cs50">Discord</a> <span class="badge bg-light ms-1 py-1 rounded-pill text-dark">Q&amp;A</span></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.edx.org/ed">Ed</a> <span class="badge bg-light ms-1 py-1 rounded-pill text-dark">Q&amp;A</span></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://www.facebook.com/groups/cs50/">Facebook Group</a> <span class="badge bg-light ms-1 py-1 rounded-pill text-dark">Q&amp;A</span></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://www.facebook.com/cs50/">Facebook Page</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://github.com/cs50">GitHub</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://gitter.im/cs50/x">Gitter</a> <span class="badge bg-light ms-1 py-1 rounded-pill text-dark">Q&amp;A</span></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://instagram.com/cs50">Instagram</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://www.linkedin.com/groups/7437240/">LinkedIn Group</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://www.linkedin.com/school/CS50/">LinkedIn Page</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.medium.com/">Medium</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://www.quora.com/topic/CS50">Quora</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://www.reddit.com/r/cs50/">Reddit</a> <span class="badge bg-light ms-1 py-1 rounded-pill text-dark">Q&amp;A</span></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.edx.org/slack">Slack</a> <span class="badge bg-light ms-1 py-1 rounded-pill text-dark">Q&amp;A</span></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://www.snapchat.com/add/cs50">Snapchat</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://soundcloud.com/cs50">SoundCloud</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.stackexchange.com/">Stack Exchange</a> <span class="badge bg-light ms-1 py-1 rounded-pill text-dark">Q&amp;A</span></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://twitter.com/cs50">Twitter</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="http://www.youtube.com/subscription_center?add_user=cs50tv">YouTube</a></li>
+</ul>
+
+<hr>
+
+<p><a href="https://cs50.harvardshop.com/"><img src="./Artificial Intelligence - CS50x 2021_files/GGMdcKt.png" alt="Harvard Shop"></a></p>
+
+<hr>
+
+<p><a href="https://cs50.harvard.edu/x/2021/license/" class="small"><i class="fab fa-creative-commons me-1"></i>License</a></p></nav>
+
+                    <footer></footer>
+
+                </aside>
+
+                <main class="col-md" style="margin-bottom: 223px; margin-top: 58px;">
+
+                    <a data-id="" id="artificial-intelligence" style="top: -58px;"></a><h1 class="no_toc"><a data-id="" href="https://cs50.harvard.edu/x/2021/notes/ai/#artificial-intelligence">Artificial Intelligence</a></h1>
+
+<ul id="markdown-toc">
+  <li><a href="https://cs50.harvard.edu/x/2021/notes/ai/#introduction" id="markdown-toc-introduction">Introduction</a></li>
+  <li><a href="https://cs50.harvard.edu/x/2021/notes/ai/#decision-making" id="markdown-toc-decision-making">Decision-Making</a></li>
+  <li><a href="https://cs50.harvard.edu/x/2021/notes/ai/#search" id="markdown-toc-search">Search</a></li>
+  <li><a href="https://cs50.harvard.edu/x/2021/notes/ai/#heuristics" id="markdown-toc-heuristics">Heuristics</a></li>
+  <li><a href="https://cs50.harvard.edu/x/2021/notes/ai/#reinforcement-learning" id="markdown-toc-reinforcement-learning">Reinforcement Learning</a></li>
+  <li><a href="https://cs50.harvard.edu/x/2021/notes/ai/#genetic-algorithms" id="markdown-toc-genetic-algorithms">Genetic Algorithms</a></li>
+  <li><a href="https://cs50.harvard.edu/x/2021/notes/ai/#neural-networks" id="markdown-toc-neural-networks">Neural Networks</a></li>
+</ul>
+
+<a data-id="" id="introduction" style="top: -58px;"></a><h2><a data-id="" href="https://cs50.harvard.edu/x/2021/notes/ai/#introduction">Introduction</a></h2>
+
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><strong>Artificial intelligence</strong> can be described as programming our computers to behave intelligently, rationally, or like humans.</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>For example, this might include the ability to play a game, like tic-tac-toe, reasoning about best moves as well as future moves of an opponent.</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>AI might also involve recognizing handwritten text, detecting spam emails accurately, recommending videos for a user based on their “watch history”, and even generating images of humans that don’t exist.</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>AI isn’t a single algorithm or principle, but a collection of approaches to problem-solving.</li>
+</ul>
+
+<a data-id="" id="decision-making" style="top: -58px;"></a><h2><a data-id="" href="https://cs50.harvard.edu/x/2021/notes/ai/#decision-making">Decision-Making</a></h2>
+
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>We might want to train a computer to make a <strong>decision</strong> well, like what move to make next in a game, whether or not an email is spam, or whether or not to recommend a video to a user.</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>Let’s consider a game where we use a paddle and a ball to break blocks:<br>
+<img src="./Artificial Intelligence - CS50x 2021_files/block_game.png" alt="blocks in grid at top of screen, ball in middle of screen, paddle at bottom of screen"></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>The computer can observe that the ball is moving to the left, and we can program the computer to move the paddle left in response, to catch the ball before it falls through to the ground.</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><strong>Decision trees</strong> can be used to represent the logic behind decisions, with questions being asked at each step, and further questions or actions based on the answers to each:<br>
+<img src="./Artificial Intelligence - CS50x 2021_files/decision_tree.png" alt="tree with question &quot;Is ball left of paddle?&quot; at top, left branch &quot;Yes&quot; pointing to &quot;Move paddle left&quot;, right branch &quot;No&quot; pointing to another question &quot;Is ball right of paddle?&quot; with branches &quot;Yes&quot;, &quot;Move paddle right&quot; and &quot;No&quot;, &quot;Don&#39;t move paddle&quot;"></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>We can write this in pseudocode:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>while game is ongoing:
+    if ball left of paddle:
+        move paddle left
+    else if ball right of paddle:
+        move paddle right
+    else:
+        don't move paddle
+</code></pre></div>    </div>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>With tic-tac-toe, we might ask “Can I get 3 in a row on this turn?”. If so, we should play that. Otherwise, we can ask “Can my opponent get 3 in a row on next turn?”, and play in that square to block them if so. But if neither of those conditions are true, it’s unclear what we should program the computer to do.</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>It turns out that we can use a more generic algorithm for the computer to make an optimal decision.</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><strong>Minimax</strong> is a game-playing algorithm where every outcome has a value or score, and each player is either trying to maximize or minimize the score.</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>For example, in tic-tac-toe with two players, X and O, we have three possibilities:
+    <ul class="fa-ul">
+      <li data-marker="-"><span class="fa-li"><i class="far fa-minus-square"></i></span><span>The player for O wins, to which we can assign a value of -1</span></li>
+      <li data-marker="-"><span class="fa-li"><i class="far fa-minus-square"></i></span><span>Neither player wins, to which we can assign a value of 0</span></li>
+      <li data-marker="-"><span class="fa-li"><i class="far fa-minus-square"></i></span><span>The player for X wins, to which we can assign a value of 1</span></li>
+    </ul>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>Now, player X will want to maximize the final value, while player O will want to minimuze the final value.</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>A game that hasn’t ended can still be scored based on the best moves each player can make. For example, a game where it is X’s turn, and X can win, has a value of 1.</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>In a more ambigious game, the computer will have to consider each possibility with a <strong>game tree</strong>:<br>
+<img src="./Artificial Intelligence - CS50x 2021_files/tic-tac-toe.png" alt="board where neither player can win, with branches for each position O can move, then final state where X makes move">
+    <ul class="fa-ul">
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>Since it is O’s turn, O can make a move in either of two positions, and then X will make the final move.</li>
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>Once the game is over, a score can be assigned to each possible move, as well as the move that leads to those outcomes.</li>
+    </ul>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>With bigger trees, a computer can represent more states and consider all possible moves, with recursive pseudocode that might look like this:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>if player is X:
+    for all possible moves:
+        calculate score for board
+    choose move with highest score
+else:
+    for all possible moves:
+        calculate score for board
+    choose move with lowest score
+</code></pre></div>    </div>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>One problem with this approach is that there might be too many moves to compute in a game. Tic-tac-toe only has 255,168 possible games, but chess has about 288 billion possibilities, even after the first four moves. Considering all moves, the lower bound of possible games is on the order of <mjx-container class="MathJax CtxtMenu_Attached_0" jax="CHTML" role="presentation" tabindex="0" ctxtmenu_counter="0" style="font-size: 101.1%; position: relative;"><mjx-math class="MJX-TEX" aria-hidden="true"><mjx-msup><mjx-mn class="mjx-n"><mjx-c class="mjx-c31"></mjx-c><mjx-c class="mjx-c30"></mjx-c></mjx-mn><mjx-script style="vertical-align: 0.393em;"><mjx-texatom size="s" texclass="ORD"><mjx-mn class="mjx-n"><mjx-c class="mjx-c32"></mjx-c><mjx-c class="mjx-c39"></mjx-c><mjx-c class="mjx-c30"></mjx-c><mjx-c class="mjx-c30"></mjx-c><mjx-c class="mjx-c30"></mjx-c></mjx-mn></mjx-texatom></mjx-script></mjx-msup></mjx-math><mjx-assistive-mml role="presentation" unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mn>10</mn><mrow><mn>29000</mn></mrow></msup></math></mjx-assistive-mml></mjx-container>.</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>We can improve our minimax algorithm by limiting the paths or branches we follow. In <strong>depth-limited minimax</strong>, an <strong>evaluation function</strong> is used to estimate the expected value for a limited number of moves, so the algorithm can make a decision in a reasonable amount of time.</li>
+</ul>
+
+<a data-id="" id="search" style="top: -58px;"></a><h2><a data-id="" href="https://cs50.harvard.edu/x/2021/notes/ai/#search">Search</a></h2>
+
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>The minimax algorithm is one type of <strong>search algorithm</strong>, where the goal is to find the next move in a game or solution to some problem.</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>One problem might be finding a path through a maze, or finding a route between two places in the real world given a map.</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>We can consider a maze where we are trying to get from point A to point B. The gray squares indicate walls, and the black squares indicate possible paths:<br>
+<img src="./Artificial Intelligence - CS50x 2021_files/maze.png" alt="grid with A at bottom left and B at top right, gray and black blocks forming maze"></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>One strategy, <strong>depth-first search</strong>, might be following a possible path, choosing randomly if a choice needs to be made, and going backwards only if there are no more choices possible.</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>In our maze, we can go down the path until we see the first fork, randomly choosing left since we have no other information available to us, and continue until we reach a dead end. Then, we’ll return to the previous fork, and follow a different path. This will repeat until we reach the goal.</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>One problem with this algorithm is that it takes too long, since it considers all paths in an area before it can go back to the beginning and go in a different direction. Another problem is that the route it finds might not be the most efficient, since the random choices can lead to a longer path.</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><strong>Breadth-first search</strong> is an algorithm where we alternate taking each path, one step at a time, like searching outwards from the starting point. This will lead to finding the shortest possible path, but also explore many unnecessary paths.</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>Both of these algorithms are categorized as <strong>uninformed search</strong>, where the algorithms don’t have additional information about the problem, apart from the very next steps they can make.</li>
+</ul>
+
+<a data-id="" id="heuristics" style="top: -58px;"></a><h2><a data-id="" href="https://cs50.harvard.edu/x/2021/notes/ai/#heuristics">Heuristics</a></h2>
+
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>In <strong>informed search</strong>, we use knowledge about the problem to find solutions more efficiently with <strong>heuristics</strong>, some way of estimating solutions.</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>For example, in this maze, we might estimate that square D is better than square C, since the distance between B and D “looks” smaller than the distance between C and D:<br>
+<img src="./Artificial Intelligence - CS50x 2021_files/maze_heuristics.png" alt="maze with C and D, where D is closer to B"></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>In a maze, this heuristic is called the <strong>Manhattan distance</strong>, where we can count the number of squares vertically and horizontally between two squares, ignoring any walls in between:<br>
+<img src="./Artificial Intelligence - CS50x 2021_files/maze_manhattan_distance.png" alt="maze with lines between C and D and B and D, up and to the right"></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>With this additional information, we can make choices at each fork that are likely to be better.</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><strong>Greedy best-first search</strong> will, at each fork in the road, pick the path with the best value, which will be the lowest Manhattan distance in this case. Since the distance is easy to compute for any given square, we can label each one:<br>
+<img src="./Artificial Intelligence - CS50x 2021_files/maze_greedy.png" alt="maze with squares labeled by distance to B">
+    <ul class="fa-ul">
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>Here, we see that the algorithm takes the path towards the best value at each fork. At the square with a value of 8, it took the left path since both possibilities had a value of 7, and since that was a dead end, it went back to the other path. but at the end reached a wall. So it will go backwards and take the next fork at the square with a value of 5, which will eventually lead us to the goal.</li>
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>Our algorithm would only be calculating the heuristic for each square as it reaches them, but we’ve labeled all of them here to make them easier to visualize.</li>
+    </ul>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>But even this algorithm might not find the most efficient path, since at first an inefficient path might look like a good choice:<br>
+<img src="./Artificial Intelligence - CS50x 2021_files/maze_inefficient.png" alt="maze with two paths, one shorter with higher distance at first square, one longer with lower distance">
+    <ul class="fa-ul">
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>Here, the first fork either goes to the left or up, and even though our goal is on the top right, the path going to the left actually ends up being shorter.</li>
+    </ul>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><strong>A* search</strong>, pronounced “A star search”, uses both the heuristic value of the path, as well as the distance it has already gone for that path.</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>In our example above, we can calculate that value at each step:<br>
+<img src="./Artificial Intelligence - CS50x 2021_files/maze_a_star.png" alt="maze with squares labeled by heuristic value + distance so far">
+    <ul class="fa-ul">
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>At the first step, for example, we took one step and the square has a Manhattan distance of 16 from the goal, so the total value is 1+16. We repeat this, but eventually see that we could either be approximately 6 steps away, having taken 15 steps already (far right), or be 13 steps away, but only after taken 6 steps (far left).</li>
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>So now we should go down the left path for a more efficient solution.</li>
+    </ul>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>A* search will be optimal if we have an accurate heuristic. Ideally the heuristic is quick to calculate, so the search can be efficient overall.</li>
+</ul>
+
+<a data-id="" id="reinforcement-learning" style="top: -58px;"></a><h2><a data-id="" href="https://cs50.harvard.edu/x/2021/notes/ai/#reinforcement-learning">Reinforcement Learning</a></h2>
+
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>One type of <strong>machine learning</strong>, where a computer can essentially learn from its experiences, is called <strong>reinforcement learning</strong>, which allows a computer to learn whether its actions at each step were positive or negative.</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>For example, consider a game where a player has to move to a goal, but if it encounters an obstacle (invisible to the player), then the game ends:<br>
+<img src="./Artificial Intelligence - CS50x 2021_files/obstacles.png" alt="grid of blocks, one yellow, one green, three red">
+    <ul class="fa-ul">
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>Here, the player is the yellow circle, trying to move to the green block, with red obstacles in the map.</li>
+    </ul>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>After each step, the computer learns which directions it can safely move in, and which ones will cause it to lose:
+<img src="./Artificial Intelligence - CS50x 2021_files/obstacles_solved.png" alt="grid of blocks, one yellow, one green, three red, with red and green lines indicating learning">
+    <ul class="fa-ul">
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>The red lines indicate directions that the computer has learned to avoid, and green lines indicate directions that it has learned are safe.</li>
+    </ul>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>Given enough attempts at this game, the computer will have figured out which sequence to take to the goal.</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>We can see that this algorithm is inefficient in finding the best path, too, so we want it to both <strong>explore</strong>, or try new actions, and <strong>exploit</strong>, or use actions it has done before that are safe.</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>This tradeoff might be done randomly:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>epsilon = 0.10
+if random() &lt; epsilon:
+    make a random move
+else:
+    make the move with the highest value
+</code></pre></div>    </div>
+    <ul class="fa-ul">
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>With some probability, in this case 10%, our algorithm will explore, or make a random choice.</li>
+    </ul>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>We take a look at an example of a robot learning how to flip pancakes, where its attempts failed over and over, until it eventually figured out how to move the pan.</li>
+</ul>
+
+<a data-id="" id="genetic-algorithms" style="top: -58px;"></a><h2><a data-id="" href="https://cs50.harvard.edu/x/2021/notes/ai/#genetic-algorithms">Genetic Algorithms</a></h2>
+
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>Another approach is inspired by nature, where the most fit organisms survive and evolve over time. With <strong>genetic algorithms</strong>, many algorithms are created to try to solve some problem, and even though they might not be successful, the best ones will be mutated, or randomly changed, until we have a sufficiently good algorithm.</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>In pseudocode, we might have:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make initial generation of candidates randomly
+repeat until successful:
+    for each candidate:
+        calculate candidate's fitness
+    remove least fit candidates
+    make new generation from remaining candidates
+</code></pre></div>    </div>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>We see another example with a simulation of cars in a map, where many of them start and crash into walls right away, but some are using the sensors to avoid walls. And after enough generations of random changes to the best candidates, or the ones that drove the furthest, we end up with cars that can go very far without crashing.</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>These algorithms might reach some bottleneck, or local maximum, where they can no longer be improved by random mutations, and only some other totally different algorithms can be better.</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>Another application of these algorithms is in video recommendations, where a recommended video that is watched can be taken as positive reinforcement.</li>
+</ul>
+
+<a data-id="" id="neural-networks" style="top: -58px;"></a><h2><a data-id="" href="https://cs50.harvard.edu/x/2021/notes/ai/#neural-networks">Neural Networks</a></h2>
+
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>In the human brain, neurons pass signals to one another to perform computations. A <strong>neural network</strong> is a collection of neurons, and we can simulate them digitally as well. We can have some number of neurons, or <strong>units</strong>, storing some value and performing some calculation on it before passing it along.</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>We can even have layers of units, each of which performing some calculation on its inputs, before passing its outputs on to the next:
+<img src="./Artificial Intelligence - CS50x 2021_files/neural_network.png" alt="graph of units with arrows indicating connections from left to right"></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><strong>Deep learning</strong> refers to the use of these neural networks, combined with linear algebra, to solve some problem. Given enough input data, these neural networks can be trained to set its values and calculations to translate some inputs into outputs.</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>One application is handwriting recognition. After we label many images of handwritten digits with their actual value, we can train a neural network to recognize new images.</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>Similarly, emails can be labeled as legitimate or spam, and a neural network can learn to determine which category to place new emails into.</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>The key to these algorithms is a large amount of data, so these neural networks can be more accurate.</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>Images of humans can be generated with neural networks as well. At first, it might only be able to generate a small number of pixels. Then, given that image as input, it can add more details that are closer to images of humans, and eventually a convincing image can be generated.</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>One concern with machine learning is that there isn’t a lot of <strong>interpretability</strong>, or ability for humans to understand what the neural network is doing to come up with its outputs.</li>
+</ul>
+
+
+                </main>
+
+            </div>
+
+        </div>
+
+        
+ 
+        <script src="./Artificial Intelligence - CS50x 2021_files/page.js.download"></script>
+
+    
+
+
+</body></html>

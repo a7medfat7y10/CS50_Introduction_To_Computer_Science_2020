@@ -1,0 +1,1548 @@
+<!DOCTYPE html>
+<!-- saved from url=(0040)https://cs50.harvard.edu/x/2021/notes/4/ -->
+<html lang="en-us" class="wf-ptsans-n4-active wf-ptsans-n7-active wf-active"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><meta property="og:description" content="Harvard University&#39;s introduction to the intellectual enterprises of computer science and the art of programming.">
+
+        <meta property="og:image" content="https://img.youtube.com/vi/zYierUhIFNQ/maxresdefault.jpg"><meta property="og:title" content="Lecture 4 - CS50x 2021">
+
+        <link href="https://cs50.harvard.edu/x/2021/favicon.ico?1630960824" rel="icon">
+
+        <!-- https://fonts.google.com/specimen/PT+Sans?query=PT+Sans&selection.family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700 -->
+        <script src="./Lecture 4 - CS50x 2021_files/webfont.js.download"></script>
+
+        <!-- http://getbootstrap.com/docs/4.6/getting-started/introduction/ -->
+        <script src="./Lecture 4 - CS50x 2021_files/jquery.min.js.download"></script>
+        <script src="./Lecture 4 - CS50x 2021_files/bootstrap.bundle.min.js.download"></script>
+
+        <!-- https://bootstrap-table.com/docs/getting-started/introduction/ -->
+        <link href="./Lecture 4 - CS50x 2021_files/bootstrap-table.min.css" rel="stylesheet">
+        <script src="./Lecture 4 - CS50x 2021_files/bootstrap-table.min.js.download"></script>
+        <script src="./Lecture 4 - CS50x 2021_files/bootstrap-table-mobile.min.js.download"></script>
+
+        <!-- https://fontawesome.com/how-to-use/on-the-web/referencing-icons/basic-use -->
+        <link href="./Lecture 4 - CS50x 2021_files/all.min.css" rel="stylesheet">
+
+        <!-- https://moment.github.io/luxon/ -->
+        <script src="./Lecture 4 - CS50x 2021_files/luxon.min.js.download"></script>
+
+        <!-- http://docs.mathjax.org/ -->
+        <!-- https://www.jsdelivr.com/package/npm/mathjax?path=es5 -->
+        <script crossorigin="anonymous" integrity="sha256-+nfSJ1LiSvANSK3wvi6FjM+oFwoIQvURU1frozp5z6o=" src="./Lecture 4 - CS50x 2021_files/tex-chtml.js.download"></script><style type="text/css">.CtxtMenu_InfoClose {  top:.2em; right:.2em;}
+.CtxtMenu_InfoContent {  overflow:auto; text-align:left; font-size:80%;  padding:.4em .6em; border:1px inset; margin:1em 0px;  max-height:20em; max-width:30em; background-color:#EEEEEE;  white-space:normal;}
+.CtxtMenu_Info.CtxtMenu_MousePost {outline:none;}
+.CtxtMenu_Info {  position:fixed; left:50%; width:auto; text-align:center;  border:3px outset; padding:1em 2em; background-color:#DDDDDD;  color:black;  cursor:default; font-family:message-box; font-size:120%;  font-style:normal; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 15px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius:15px;               /* Safari and Chrome */  -moz-border-radius:15px;                  /* Firefox */  -khtml-border-radius:15px;                /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */  filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color="gray", Positive="true"); /* IE */}
+</style><style type="text/css">.CtxtMenu_MenuClose {  position:absolute;  cursor:pointer;  display:inline-block;  border:2px solid #AAA;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  font-family: "Courier New", Courier;  font-size:24px;  color:#F0F0F0}
+.CtxtMenu_MenuClose span {  display:block; background-color:#AAA; border:1.5px solid;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  line-height:0;  padding:8px 0 6px     /* may need to be browser-specific */}
+.CtxtMenu_MenuClose:hover {  color:white!important;  border:2px solid #CCC!important}
+.CtxtMenu_MenuClose:hover span {  background-color:#CCC!important}
+.CtxtMenu_MenuClose:hover:focus {  outline:none}
+</style><style type="text/css">.CtxtMenu_Menu {  position:absolute;  background-color:white;  color:black;  width:auto; padding:5px 0px;  border:1px solid #CCCCCC; margin:0; cursor:default;  font: menu; text-align:left; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 5px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius: 5px;             /* Safari and Chrome */  -moz-border-radius: 5px;                /* Firefox */  -khtml-border-radius: 5px;              /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */}
+.CtxtMenu_MenuItem {  padding: 1px 2em;  background:transparent;}
+.CtxtMenu_MenuArrow {  position:absolute; right:.5em; padding-top:.25em; color:#666666;  font-family: null; font-size: .75em}
+.CtxtMenu_MenuActive .CtxtMenu_MenuArrow {color:white}
+.CtxtMenu_MenuArrow.CtxtMenu_RTL {left:.5em; right:auto}
+.CtxtMenu_MenuCheck {  position:absolute; left:.7em;  font-family: null}
+.CtxtMenu_MenuCheck.CtxtMenu_RTL { right:.7em; left:auto }
+.CtxtMenu_MenuRadioCheck {  position:absolute; left: .7em;}
+.CtxtMenu_MenuRadioCheck.CtxtMenu_RTL {  right: .7em; left:auto}
+.CtxtMenu_MenuInputBox {  padding-left: 1em; right:.5em; color:#666666;  font-family: null;}
+.CtxtMenu_MenuInputBox.CtxtMenu_RTL {  left: .1em;}
+.CtxtMenu_MenuComboBox {  left:.1em; padding-bottom:.5em;}
+.CtxtMenu_MenuSlider {  left: .1em;}
+.CtxtMenu_SliderValue {  position:absolute; right:.1em; padding-top:.25em; color:#333333;  font-size: .75em}
+.CtxtMenu_SliderBar {  outline: none; background: #d3d3d3}
+.CtxtMenu_MenuLabel {  padding: 1px 2em 3px 1.33em;  font-style:italic}
+.CtxtMenu_MenuRule {  border-top: 1px solid #DDDDDD;  margin: 4px 3px;}
+.CtxtMenu_MenuDisabled {  color:GrayText}
+.CtxtMenu_MenuActive {  background-color: #606872;  color: white;}
+.CtxtMenu_MenuDisabled:focus {  background-color: #E8E8E8}
+.CtxtMenu_MenuLabel:focus {  background-color: #E8E8E8}
+.CtxtMenu_ContextMenu:focus {  outline:none}
+.CtxtMenu_ContextMenu .CtxtMenu_MenuItem:focus {  outline:none}
+.CtxtMenu_SelectionMenu {  position:relative; float:left;  border-bottom: none; -webkit-box-shadow:none; -webkit-border-radius:0px; }
+.CtxtMenu_SelectionItem {  padding-right: 1em;}
+.CtxtMenu_Selection {  right: 40%; width:50%; }
+.CtxtMenu_SelectionBox {  padding: 0em; max-height:20em; max-width: none;  background-color:#FFFFFF;}
+.CtxtMenu_SelectionDivider {  clear: both; border-top: 2px solid #000000;}
+.CtxtMenu_Menu .CtxtMenu_MenuClose {  top:-10px; left:-10px}
+</style>
+
+        <!-- https://github.com/verlok/vanilla-lazyload -->
+        <script src="./Lecture 4 - CS50x 2021_files/intersection-observer.js.download"></script>
+        <script src="./Lecture 4 - CS50x 2021_files/lazyload.min.js.download"></script>
+
+        <!-- https://github.com/davidjbradshaw/iframe-resizer -->
+        <!-- https://www.jsdelivr.com/package/npm/iframe-resizer?path=js -->
+        <script crossorigin="anonymous" integrity="sha256-S8f0Q/V9VcfrqYgWo9EFS9zuDMdPTBMC+CBW0RjxQbs=" src="./Lecture 4 - CS50x 2021_files/iframeResizer.min.js.download"></script>
+
+        <!-- https://github.com/scratchblocks/scratchblocks -->
+        <script src="./Lecture 4 - CS50x 2021_files/scratchblocks-v3.5.2-min.js.download"></script><style><![CDATA[ .sb-label {
+      font-family: Lucida Grande, Verdana, Arial, DejaVu Sans, sans-serif;
+      font-weight: bold;
+      fill: #fff;
+      font-size: 10px;
+      word-spacing: +1px;
+    }
+
+    .sb-obsolete { fill: #d42828; }
+    .sb-motion { fill: #4a6cd4; }
+    .sb-looks { fill: #8a55d7; }
+    .sb-sound { fill: #bb42c3; }
+    .sb-pen { fill: #0e9a6c;  }
+    .sb-events { fill: #c88330; }
+    .sb-control { fill: #e1a91a; }
+    .sb-sensing { fill: #2ca5e2; }
+    .sb-operators { fill: #5cb712; }
+    .sb-variables { fill: #ee7d16; }
+    .sb-list { fill: #cc5b22 }
+    .sb-custom { fill: #632d99; }
+    .sb-custom-arg { fill: #5947b1; }
+    .sb-extension { fill: #4b4a60; }
+    .sb-grey { fill: #969696; }
+
+    .sb-bevel {
+      filter: url(#bevelFilter);
+    }
+
+    .sb-input {
+      filter: url(#inputBevelFilter);
+    }
+    .sb-input-number,
+    .sb-input-string,
+    .sb-input-number-dropdown {
+      fill: #fff;
+    }
+    .sb-literal-number,
+    .sb-literal-string,
+    .sb-literal-number-dropdown,
+    .sb-literal-dropdown {
+      font-weight: normal;
+      font-size: 9px;
+      word-spacing: 0;
+    }
+    .sb-literal-number,
+    .sb-literal-string,
+    .sb-literal-number-dropdown {
+      fill: #000;
+    }
+
+    .sb-darker {
+      filter: url(#inputDarkFilter);
+    }
+
+    .sb-outline {
+      stroke: #fff;
+      stroke-opacity: 0.2;
+      stroke-width: 2;
+      fill: none;
+    }
+
+    .sb-define-hat-cap {
+      stroke: #632d99;
+      stroke-width: 1;
+      fill: #8e2ec2;
+    }
+
+    .sb-comment {
+      fill: #ffffa5;
+      stroke: #d0d1d2;
+      stroke-width: 1;
+    }
+    .sb-comment-line {
+      fill: #ffff80;
+    }
+    .sb-comment-label {
+      font-family: Helevetica, Arial, DejaVu Sans, sans-serif;
+      font-weight: bold;
+      fill: #5c5d5f;
+      word-spacing: 0;
+      font-size: 12px;
+    }
+
+    .sb-diff {
+      fill: none;
+      stroke: #000;
+    }
+    .sb-diff-ins {
+      stroke-width: 2px;
+    }
+    .sb-diff-del {
+      stroke-width: 3px;
+    }
+  ]]></style><style><![CDATA[ .sb3-label {
+      font: 500 12pt Helevetica Neue, Helvetica, sans-serif;
+      fill: #fff;
+      word-spacing: +1pt;
+    }
+
+    .sb3-motion { fill: #4c97ff; stroke: #3373cc; }
+    .sb3-motion-alt { fill: #4280d7; }
+    .sb3-motion-dark { fill: #4c97ff; }
+    .sb3-looks { fill: #9966ff; stroke: #774dcb; }
+    .sb3-looks-alt { fill: #855cd6; }
+    .sb3-looks-dark { fill: #bd42bd; }
+    .sb3-sound { fill: #cf63cf; stroke: #bd42bd; }
+    .sb3-sound-alt { fill: #c94fc9; }
+    .sb3-sound-dark { fill: #bd42bd; }
+    .sb3-control { fill: #ffab19; stroke: #cf8b17; }
+    .sb3-control-alt { fill: #ec9c13; }
+    .sb3-control-dark { fill: #cf8b17; }
+    .sb3-events { fill: #ffbf00; stroke: #cc9900; }
+    .sb3-events-alt { fill: #e6ac00; }
+    .sb3-events-dark { fill: #cc9900; }
+    .sb3-sensing { fill: #5cb1d6; stroke: #2e8eb8; }
+    .sb3-sensing-alt { fill: #47a8d1; }
+    .sb3-sensing-dark { fill: #2e8eb8; }
+    .sb3-operators { fill: #59c059; stroke: #389438; }
+    .sb3-operators-alt { fill: #46b946; }
+    .sb3-operators-dark { fill: #389438; }
+    .sb3-variables { fill: #ff8c1a; stroke: #db6e00; }
+    .sb3-variables-alt { fill: #ff8000; }
+    .sb3-variables-dark { fill: #db6e00; }
+    .sb3-list { fill: #ff661a; stroke: #e64d00; }
+    .sb3-list-alt { fill: #ff5500; }
+    .sb3-list-dark { fill: #e64d00; }
+    .sb3-custom { fill: #ff6680; stroke: #ff3355; }
+    .sb3-custom-alt { fill: #ff4d6a; }
+    .sb3-custom-dark { fill: #ff3355; }
+    .sb3-custom-arg { fill: #ff6680; stroke: #ff3355; }
+
+    /* extension blocks, e.g. pen */
+    .sb3-extension { fill: #0fbd8c; stroke: #0b8e69; }
+    .sb3-extension-alt { fill: #0da57a; }
+    .sb3-extension-line { stroke: #0da57a; }
+    .sb3-extension-dark { fill: #0b8e69; }
+
+    /* obsolete colors: chosen by hand, indicates invalid blocks */
+    .sb3-obsolete { fill: #ed4242; stroke: #ca2b2b; }
+    .sb3-obsolete-alt { fill: #db3333; }
+    .sb3-obsolete-dark { fill: #ca2b2b; }
+
+    /* grey: special color from the Scratch 3.0 design mockups */
+    .sb3-grey { fill: #bfbfbf; stroke: #909090; }
+    .sb3-grey-alt { fill: #b2b2b2; }
+    .sb3-grey-dark { fill: #909090; }
+
+    .sb3-input-color {
+      stroke: #fff;
+    }
+
+    .sb3-input-number,
+    .sb3-input-string {
+      fill: #fff;
+    }
+    .sb3-literal-number,
+    .sb3-literal-string,
+    .sb3-literal-number-dropdown,
+    .sb3-literal-dropdown {
+      word-spacing: 0;
+    }
+    .sb3-literal-number,
+    .sb3-literal-string {
+      fill: #575e75;
+    }
+
+    .sb3-comment {
+      fill: #ffffa5;
+      stroke: #d0d1d2;
+      stroke-width: 1;
+    }
+    .sb3-comment-line {
+      fill: #ffff80;
+    }
+    .sb3-comment-label {
+      font: 400 12pt Helevetica Neue, Helvetica, sans-serif;
+      fill: #000;
+      word-spacing: 0;
+    }
+
+    .sb3-diff {
+      fill: none;
+      stroke: #000;
+    }
+    .sb3-diff-ins {
+      stroke-width: 2px;
+    }
+    .sb3-diff-del {
+      stroke-width: 3px;
+    }
+  ]]></style>
+
+        
+
+        <link href="./Lecture 4 - CS50x 2021_files/page.css" rel="stylesheet">
+        <link rel="stylesheet" href="./Lecture 4 - CS50x 2021_files/css" media="all"><script src="./Lecture 4 - CS50x 2021_files/jekyll-theme-cs50.js.download"></script>
+
+        <script>
+            window.CS50 = {
+                locale: "en",
+                tz: "America/New_York"
+            };
+        </script>
+
+        <title>Lecture 4 - CS50x 2021</title>
+
+
+    <style id="MJX-CHTML-styles">
+mjx-container[jax="CHTML"] {
+  line-height: 0;
+}
+
+mjx-container [space="1"] {
+  margin-left: .111em;
+}
+
+mjx-container [space="2"] {
+  margin-left: .167em;
+}
+
+mjx-container [space="3"] {
+  margin-left: .222em;
+}
+
+mjx-container [space="4"] {
+  margin-left: .278em;
+}
+
+mjx-container [space="5"] {
+  margin-left: .333em;
+}
+
+mjx-container [rspace="1"] {
+  margin-right: .111em;
+}
+
+mjx-container [rspace="2"] {
+  margin-right: .167em;
+}
+
+mjx-container [rspace="3"] {
+  margin-right: .222em;
+}
+
+mjx-container [rspace="4"] {
+  margin-right: .278em;
+}
+
+mjx-container [rspace="5"] {
+  margin-right: .333em;
+}
+
+mjx-container [size="s"] {
+  font-size: 70.7%;
+}
+
+mjx-container [size="ss"] {
+  font-size: 50%;
+}
+
+mjx-container [size="Tn"] {
+  font-size: 60%;
+}
+
+mjx-container [size="sm"] {
+  font-size: 85%;
+}
+
+mjx-container [size="lg"] {
+  font-size: 120%;
+}
+
+mjx-container [size="Lg"] {
+  font-size: 144%;
+}
+
+mjx-container [size="LG"] {
+  font-size: 173%;
+}
+
+mjx-container [size="hg"] {
+  font-size: 207%;
+}
+
+mjx-container [size="HG"] {
+  font-size: 249%;
+}
+
+mjx-container [width="full"] {
+  width: 100%;
+}
+
+mjx-box {
+  display: inline-block;
+}
+
+mjx-block {
+  display: block;
+}
+
+mjx-itable {
+  display: inline-table;
+}
+
+mjx-row {
+  display: table-row;
+}
+
+mjx-row > * {
+  display: table-cell;
+}
+
+mjx-mtext {
+  display: inline-block;
+}
+
+mjx-mstyle {
+  display: inline-block;
+}
+
+mjx-merror {
+  display: inline-block;
+  color: red;
+  background-color: yellow;
+}
+
+mjx-mphantom {
+  visibility: hidden;
+}
+
+mjx-assistive-mml {
+  position: absolute !important;
+  top: 0px;
+  left: 0px;
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 1px 0px 0px 0px !important;
+  border: 0px !important;
+  display: block !important;
+  width: auto !important;
+  overflow: hidden !important;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+mjx-assistive-mml[display="block"] {
+  width: 100% !important;
+}
+
+mjx-c::before {
+  display: block;
+  width: 0;
+}
+
+.MJX-TEX {
+  font-family: MJXZERO, MJXTEX;
+}
+
+.TEX-B {
+  font-family: MJXZERO, MJXTEX-B;
+}
+
+.TEX-I {
+  font-family: MJXZERO, MJXTEX-I;
+}
+
+.TEX-MI {
+  font-family: MJXZERO, MJXTEX-MI;
+}
+
+.TEX-BI {
+  font-family: MJXZERO, MJXTEX-BI;
+}
+
+.TEX-S1 {
+  font-family: MJXZERO, MJXTEX-S1;
+}
+
+.TEX-S2 {
+  font-family: MJXZERO, MJXTEX-S2;
+}
+
+.TEX-S3 {
+  font-family: MJXZERO, MJXTEX-S3;
+}
+
+.TEX-S4 {
+  font-family: MJXZERO, MJXTEX-S4;
+}
+
+.TEX-A {
+  font-family: MJXZERO, MJXTEX-A;
+}
+
+.TEX-C {
+  font-family: MJXZERO, MJXTEX-C;
+}
+
+.TEX-CB {
+  font-family: MJXZERO, MJXTEX-CB;
+}
+
+.TEX-FR {
+  font-family: MJXZERO, MJXTEX-FR;
+}
+
+.TEX-FRB {
+  font-family: MJXZERO, MJXTEX-FRB;
+}
+
+.TEX-SS {
+  font-family: MJXZERO, MJXTEX-SS;
+}
+
+.TEX-SSB {
+  font-family: MJXZERO, MJXTEX-SSB;
+}
+
+.TEX-SSI {
+  font-family: MJXZERO, MJXTEX-SSI;
+}
+
+.TEX-SC {
+  font-family: MJXZERO, MJXTEX-SC;
+}
+
+.TEX-T {
+  font-family: MJXZERO, MJXTEX-T;
+}
+
+.TEX-V {
+  font-family: MJXZERO, MJXTEX-V;
+}
+
+.TEX-VB {
+  font-family: MJXZERO, MJXTEX-VB;
+}
+
+mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
+  font-family: MJXZERO, MJXTEX-S1, MJXTEX-S4, MJXTEX, MJXTEX-A ! important;
+}
+
+@font-face /* 0 */ {
+  font-family: MJXZERO;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_Zero.woff") format("woff");
+}
+
+@font-face /* 1 */ {
+  font-family: MJXTEX;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_Main-Regular.woff") format("woff");
+}
+
+@font-face /* 2 */ {
+  font-family: MJXTEX-B;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_Main-Bold.woff") format("woff");
+}
+
+@font-face /* 3 */ {
+  font-family: MJXTEX-I;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_Math-Italic.woff") format("woff");
+}
+
+@font-face /* 4 */ {
+  font-family: MJXTEX-MI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_Main-Italic.woff") format("woff");
+}
+
+@font-face /* 5 */ {
+  font-family: MJXTEX-BI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_Math-BoldItalic.woff") format("woff");
+}
+
+@font-face /* 6 */ {
+  font-family: MJXTEX-S1;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_Size1-Regular.woff") format("woff");
+}
+
+@font-face /* 7 */ {
+  font-family: MJXTEX-S2;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_Size2-Regular.woff") format("woff");
+}
+
+@font-face /* 8 */ {
+  font-family: MJXTEX-S3;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_Size3-Regular.woff") format("woff");
+}
+
+@font-face /* 9 */ {
+  font-family: MJXTEX-S4;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_Size4-Regular.woff") format("woff");
+}
+
+@font-face /* 10 */ {
+  font-family: MJXTEX-A;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_AMS-Regular.woff") format("woff");
+}
+
+@font-face /* 11 */ {
+  font-family: MJXTEX-C;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Regular.woff") format("woff");
+}
+
+@font-face /* 12 */ {
+  font-family: MJXTEX-CB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Bold.woff") format("woff");
+}
+
+@font-face /* 13 */ {
+  font-family: MJXTEX-FR;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Regular.woff") format("woff");
+}
+
+@font-face /* 14 */ {
+  font-family: MJXTEX-FRB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Bold.woff") format("woff");
+}
+
+@font-face /* 15 */ {
+  font-family: MJXTEX-SS;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Regular.woff") format("woff");
+}
+
+@font-face /* 16 */ {
+  font-family: MJXTEX-SSB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Bold.woff") format("woff");
+}
+
+@font-face /* 17 */ {
+  font-family: MJXTEX-SSI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Italic.woff") format("woff");
+}
+
+@font-face /* 18 */ {
+  font-family: MJXTEX-SC;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_Script-Regular.woff") format("woff");
+}
+
+@font-face /* 19 */ {
+  font-family: MJXTEX-T;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_Typewriter-Regular.woff") format("woff");
+}
+
+@font-face /* 20 */ {
+  font-family: MJXTEX-V;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Regular.woff") format("woff");
+}
+
+@font-face /* 21 */ {
+  font-family: MJXTEX-VB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Bold.woff") format("woff");
+}
+</style></head>
+
+    <body class="" cz-shortcut-listen="true">
+
+        <div class="alert fixed-top mb-0 rounded-0 shadow alert-success alert-dismissible" data-alert="success dismissible" data-hash="14c26b7088b495629d13e2eb6186501b" id="alert" role="alert">
+            <button aria-label="Close" class="btn-close" data-bs-dismiss="alert" type="button"></button><p>Interested in <a href="https://cs50.harvard.edu/x/2021/#how-to-take-this-course" class="alert-link">a verified certificate, a professional certificate, or transfer credit and accreditation</a>?
+And get vaccinated (as soon as it’s available to you). 💉 <a href="https://www.who.int/news-room/q-a-detail/coronavirus-disease-(covid-19)-vaccines" class="alert-link">Here’s why</a>. <a href="https://www.google.com/search?q=covid-19+vaccine+finder" class="alert-link">Here’s how</a>.</p></div>
+        
+
+        <div class="container-fluid">
+
+            <div class="row">
+
+                <aside class="col-md" style="height: 638px; top: 58px;">
+ 
+                    <header><h1 data-id="this-is-cs50x"><a href="https://cs50.harvard.edu/x/2021/">This is CS50x</a></h1>
+
+<p>OpenCourseWare</p>
+
+<p><a class="pr-1 small" href="https://cs50.harvard.edu/donate">Donate<i aria-hidden="true" class="fas fa-external-link-alt ps-2"></i></a></p>
+
+<p><a href="https://cs.harvard.edu/malan/">David J. Malan</a>
+<br>
+<a href="mailto:malan@harvard.edu">malan@harvard.edu</a>
+<br>
+<a class="mr-1" href="https://www.facebook.com/dmalan"><i aria-hidden="true" class="fab fa-facebook-f" title="Facebook"></i><span class="sr-only">Facebook</span></a>
+<a class="mr-1" href="https://github.com/dmalan"><i aria-hidden="true" class="fab fa-github" title="GitHub"></i><span class="sr-only">GitHub</span></a>
+<a class="mr-1" href="https://www.instagram.com/davidjmalan/"><i aria-hidden="true" class="fab fa-instagram" title="Instagram"></i><span class="sr-only">Instagram</span></a>
+<a class="mr-1" href="https://www.linkedin.com/in/malan/"><i aria-hidden="true" class="fab fa-linkedin" title="LinkedIn"></i><span class="sr-only">LinkedIn</span></a>
+<a class="mr-1" href="https://orcid.org/0000-0001-5338-2522"><i aria-hidden="true" class="fab fa-orcid" title="ORCID"></i><span class="sr-only">ORCID</span></a>
+<a class="mr-1" href="https://www.quora.com/profile/David-J-Malan"><i aria-hidden="true" class="fab fa-quora" title="Quora"></i><span class="sr-only">Quora</span></a>
+<a class="mr-1" href="https://www.reddit.com/user/davidjmalan"><i aria-hidden="true" class="fab fa-reddit-alien" title="Reddit"></i><span class="sr-only">Reddit</span></a>
+<a class="mr-1" href="https://twitter.com/davidjmalan"><i aria-hidden="true" class="fab fa-twitter" title="Twitter"></i><span class="sr-only">Twitter</span></a></p></header>
+
+                    
+
+                    <button aria-controls="nav" aria-expanded="false" class="btn btn-sm collapsed d-md-none" data-bs-target="aside &gt; nav" data-bs-toggle="collapse">
+                        Menu
+                    </button>
+
+                    <nav class="collapse d-md-block" id="nav"><hr>
+
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.ly/zoom/"><i class="fas fa-video pe-2"></i>Zoom Meetings</a></li>
+</ul>
+
+<hr>
+
+<ul class="small fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.harvard.edu/x/2021/workshop/">CS50 Educator Workshop 2021</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.harvard.edu/x/2021/seminars/">CS50’s New Year’s Seminars<span aria-hidden="true" class="ps-2 text-decoration-none">🥂</span></a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.harvard.edu/x/2021/gallery/">Gallery of Final Projects<span aria-hidden="true" class="ps-2 text-decoration-none">🖼️ </span></a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.harvard.edu/x/2021/new/">What’s new for 2021?</a></li>
+</ul>
+
+<hr>
+
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.harvard.edu/x/2021/weeks/0/">Week 0</a> Scratch</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.harvard.edu/x/2021/weeks/1/">Week 1</a> C</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.harvard.edu/x/2021/weeks/2/">Week 2</a> Arrays</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.harvard.edu/x/2021/weeks/3/">Week 3</a> Algorithms</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.harvard.edu/x/2021/weeks/4/">Week 4</a> Memory</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.harvard.edu/x/2021/weeks/5/">Week 5</a> Data Structures</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.harvard.edu/x/2021/weeks/6/">Week 6</a> Python</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.harvard.edu/x/2021/weeks/7/">Week 7</a> SQL</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.harvard.edu/x/2021/weeks/8/">Week 8</a> HTML, CSS, JavaScript</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.harvard.edu/x/2021/weeks/9/">Week 9</a> Flask</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.harvard.edu/x/2021/weeks/10/">Week 10</a> Ethics</li>
+</ul>
+<ul class="fa-ul">
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.harvard.edu/x/2021/weeks/security/">Security</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.harvard.edu/x/2021/weeks/ai/">Artificial Intelligence</a></li>
+</ul>
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.harvard.edu/x/2021/project/">Final Project</a></li>
+</ul>
+
+<hr>
+
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.harvard.edu/x/2021/honesty/">Academic Honesty</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.harvard.edu/x/2021/certificate/">CS50 Certificate</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.harvard.edu/x/2021/faqs/">FAQs</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.me/cs50x">Gradebook</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.harvard.edu/x/2021/staff/">Staff</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.harvard.edu/x/2021/syllabus/">Syllabus</a></li>
+</ul>
+
+<hr>
+
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.edx.org/ed">Ed Discussion</a> for Q&amp;A</li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://us.edstem.org/quickstart/ed-discussion.pdf">Quick Start Guide</a></li>
+</ul>
+
+<hr>
+
+<ul class="small fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.edx.org/">edX</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://www.youtube.com/playlist?list=PLhQjrBD2T382_R182iC2gNZI9HzWFMC_8">YouTube</a></li>
+</ul>
+
+<hr>
+
+<ul class="small fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://ide.cs50.io/">CS50 IDE</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://www.w3schools.com/css/">CSS Tutorial</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://flask.palletsprojects.com/en/1.1.x/quickstart/">Flask Quickstart</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://www.w3schools.com/html/">HTML Tutorial</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://jinja.palletsprojects.com/en/2.11.x/templates/">Jinja Template Designer Documentation</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://man.cs50.io/">Manual Pages</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://docs.python.org/3.7/search.html">Python Documentation</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://scratch.mit.edu/">Scratch</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://www.w3schools.com/sql/">SQL Tutorial</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.readthedocs.io/style/c/">Style Guide</a></li>
+</ul>
+
+<hr>
+
+<ul class="small fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.noticeable.news/">Changelog</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.statuspage.io/">Status Page</a></li>
+</ul>
+
+<hr>
+
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.harvard.edu/x/2021/communities/"><strong>Communities</strong></a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://www.clubhouse.com/club/cs50">Clubhouse</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://discord.gg/cs50">Discord</a> <span class="badge bg-light ms-1 py-1 rounded-pill text-dark">Q&amp;A</span></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.edx.org/ed">Ed</a> <span class="badge bg-light ms-1 py-1 rounded-pill text-dark">Q&amp;A</span></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://www.facebook.com/groups/cs50/">Facebook Group</a> <span class="badge bg-light ms-1 py-1 rounded-pill text-dark">Q&amp;A</span></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://www.facebook.com/cs50/">Facebook Page</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://github.com/cs50">GitHub</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://gitter.im/cs50/x">Gitter</a> <span class="badge bg-light ms-1 py-1 rounded-pill text-dark">Q&amp;A</span></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://instagram.com/cs50">Instagram</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://www.linkedin.com/groups/7437240/">LinkedIn Group</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://www.linkedin.com/school/CS50/">LinkedIn Page</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.medium.com/">Medium</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://www.quora.com/topic/CS50">Quora</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://www.reddit.com/r/cs50/">Reddit</a> <span class="badge bg-light ms-1 py-1 rounded-pill text-dark">Q&amp;A</span></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.edx.org/slack">Slack</a> <span class="badge bg-light ms-1 py-1 rounded-pill text-dark">Q&amp;A</span></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://www.snapchat.com/add/cs50">Snapchat</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://soundcloud.com/cs50">SoundCloud</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://cs50.stackexchange.com/">Stack Exchange</a> <span class="badge bg-light ms-1 py-1 rounded-pill text-dark">Q&amp;A</span></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="https://twitter.com/cs50">Twitter</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-circle"></i></span><a href="http://www.youtube.com/subscription_center?add_user=cs50tv">YouTube</a></li>
+</ul>
+
+<hr>
+
+<p><a href="https://cs50.harvardshop.com/"><img src="./Lecture 4 - CS50x 2021_files/GGMdcKt.png" alt="Harvard Shop"></a></p>
+
+<hr>
+
+<p><a href="https://cs50.harvard.edu/x/2021/license/" class="small"><i class="fab fa-creative-commons me-1"></i>License</a></p></nav>
+
+                    <footer></footer>
+
+                </aside>
+
+                <main class="col-md" style="margin-bottom: 0px; margin-top: 58px;">
+
+                    <a data-id="" id="lecture-4" style="top: -58px;"></a><h1 class="no_toc"><a data-id="" href="https://cs50.harvard.edu/x/2021/notes/4/#lecture-4">Lecture 4</a></h1>
+
+<ul id="markdown-toc">
+  <li><a href="https://cs50.harvard.edu/x/2021/notes/4/#hexadecimal" id="markdown-toc-hexadecimal">Hexadecimal</a></li>
+  <li><a href="https://cs50.harvard.edu/x/2021/notes/4/#addresses" id="markdown-toc-addresses">Addresses</a></li>
+  <li><a href="https://cs50.harvard.edu/x/2021/notes/4/#pointers" id="markdown-toc-pointers">Pointers</a></li>
+  <li><a href="https://cs50.harvard.edu/x/2021/notes/4/#strings" id="markdown-toc-strings">Strings</a></li>
+  <li><a href="https://cs50.harvard.edu/x/2021/notes/4/#pointer-arithmetic" id="markdown-toc-pointer-arithmetic">Pointer arithmetic</a></li>
+  <li><a href="https://cs50.harvard.edu/x/2021/notes/4/#compare-and-copy" id="markdown-toc-compare-and-copy">Compare and copy</a></li>
+  <li><a href="https://cs50.harvard.edu/x/2021/notes/4/#valgrind" id="markdown-toc-valgrind">valgrind</a></li>
+  <li><a href="https://cs50.harvard.edu/x/2021/notes/4/#garbage-values" id="markdown-toc-garbage-values">Garbage values</a></li>
+  <li><a href="https://cs50.harvard.edu/x/2021/notes/4/#swap" id="markdown-toc-swap">Swap</a></li>
+  <li><a href="https://cs50.harvard.edu/x/2021/notes/4/#memory-layout" id="markdown-toc-memory-layout">Memory layout</a></li>
+  <li><a href="https://cs50.harvard.edu/x/2021/notes/4/#scanf" id="markdown-toc-scanf">scanf</a></li>
+  <li><a href="https://cs50.harvard.edu/x/2021/notes/4/#files" id="markdown-toc-files">Files</a></li>
+  <li><a href="https://cs50.harvard.edu/x/2021/notes/4/#graphics" id="markdown-toc-graphics">Graphics</a></li>
+</ul>
+
+<a data-id="" id="hexadecimal" style="top: -58px;"></a><h2><a data-id="" href="https://cs50.harvard.edu/x/2021/notes/4/#hexadecimal">Hexadecimal</a></h2>
+
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>In week 2, we talked about memory and how each byte has an address, or identifier, so we can refer to where our data are actually stored.</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>It turns out that, by convention, the addresses for memory use the counting system <strong>hexadecimal</strong>, or base-16, where there are 16 digits: 0-9, and A-F as equivalents to 10-15.</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>Let’s consider a two-digit hexadecimal number:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>16^1 16^0
+   0    A
+</code></pre></div>    </div>
+    <ul class="fa-ul">
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>Here, the A in the ones place (since 16^0 = 1) has a decimal value of 10. We can keep counting until <code class="language-plaintext highlighter-rouge">0F</code>, which is equivalent to 15 in decimal.</li>
+    </ul>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>After <code class="language-plaintext highlighter-rouge">0F</code>, we need to carry the one, as we would go from 09 to 10 in decimal:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>16^1 16^0
+   1    0
+</code></pre></div>    </div>
+    <ul class="fa-ul">
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>Here, the <code class="language-plaintext highlighter-rouge">1</code> has a value of 16^1 * 1 = 16, so <code class="language-plaintext highlighter-rouge">10</code> in hexadecimal is 16 in decimal.</li>
+    </ul>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>With two digits, we can have a maximum value of <code class="language-plaintext highlighter-rouge">FF</code>, or 16^1 * 15 + 16^0 * 15 = 240 + 15 = 255, which is the same maximum value with 8 bits of binary. So two digits in hexadecimal can conveniently represent the value of a byte in binary. (Each digit in hexadecimal, with 16 values, maps to four bits in binary.)</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>In writing, we indicate a value is in hexadecimal by prefixing it with <code class="language-plaintext highlighter-rouge">0x</code>, as in <code class="language-plaintext highlighter-rouge">0x10</code>, where the value is equal to 16 in decimal, as opposed to 10.</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>The RGB color system conventionally uses hexadecimal to describe the amount of each color. For example, <code class="language-plaintext highlighter-rouge">000000</code> in hexadecimal represents 0 for each of red, green, and blue, for a combined color of black. And <code class="language-plaintext highlighter-rouge">FF0000</code> would be 255, or the highest possible, amount of red. <code class="language-plaintext highlighter-rouge">FFFFFF</code> would indicate the highest value of each color, combining to be the brightest white. With different values for each color, we can represent millions of different colors.</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>For our computer’s memory, too, we’ll use hexadecimal for each address or location.</li>
+</ul>
+
+<a data-id="" id="addresses" style="top: -58px;"></a><h2><a data-id="" href="https://cs50.harvard.edu/x/2021/notes/4/#addresses">Addresses</a></h2>
+
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>We might create a value <code class="language-plaintext highlighter-rouge">n</code>, and print it out:
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;stdio.h&gt;
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">50</span><span class="p">;</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%i</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">n</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>In our computer’s memory, there are now 4 bytes somewhere that have the binary value of 50, labeled <code class="language-plaintext highlighter-rouge">n</code>:<br>
+<img src="./Lecture 4 - CS50x 2021_files/n.png" alt="grid representing bytes, with four boxes together containing 50 with small n underneath"></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>It turns out that, with the billions of bytes in memory, those bytes for the variable <code class="language-plaintext highlighter-rouge">n</code> starts at some location, which might look something like <code class="language-plaintext highlighter-rouge">0x12345678</code>.</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>In C, we can actually see the address with the <code class="language-plaintext highlighter-rouge">&amp;</code> operator, which means “get the address of this variable”:
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;stdio.h&gt;
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">50</span><span class="p">;</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%p</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">n</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+    <ul class="fa-ul">
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><code class="language-plaintext highlighter-rouge">%p</code> is the format code for an address.</li>
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>In the CS50 IDE, we see an address like <code class="language-plaintext highlighter-rouge">0x7ffd80792f7c</code>. The value of the address in itself is not useful, since it’s just some location in memory that the variable is stored in; instead, the important idea is that we can <em>use</em> this address later.</li>
+    </ul>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>The <code class="language-plaintext highlighter-rouge">*</code> operator, or the dereference operator, lets us “go to” the location that a pointer is pointing to.</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>For example, we can print <code class="language-plaintext highlighter-rouge">*&amp;n</code>, where we “go to” the address of <code class="language-plaintext highlighter-rouge">n</code>, and that will print out the value of <code class="language-plaintext highlighter-rouge">n</code>, <code class="language-plaintext highlighter-rouge">50</code>, since that’s the value at the address of <code class="language-plaintext highlighter-rouge">n</code>:
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;stdio.h&gt;
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">50</span><span class="p">;</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%i</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="o">*&amp;</span><span class="n">n</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<a data-id="" id="pointers" style="top: -58px;"></a><h2><a data-id="" href="https://cs50.harvard.edu/x/2021/notes/4/#pointers">Pointers</a></h2>
+
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>A variable that stores an address is called a <strong>pointer</strong>, which we can think of as a value that “points” to a location in memory. In C, pointers can refer to specific types of values.</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>We can use the <code class="language-plaintext highlighter-rouge">*</code> operator (in an unfortunately confusing way) to declare a variable that we want to be a pointer:
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;stdio.h&gt;
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+   <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">50</span><span class="p">;</span>
+   <span class="kt">int</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">n</span><span class="p">;</span>
+   <span class="n">printf</span><span class="p">(</span><span class="s">"%p</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">p</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+    <ul class="fa-ul">
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>Here, we use <code class="language-plaintext highlighter-rouge">int *p</code> to declare a variable, <code class="language-plaintext highlighter-rouge">p</code>, that has the type of <code class="language-plaintext highlighter-rouge">*</code>, a pointer, to a value of type <code class="language-plaintext highlighter-rouge">int</code>, an integer. Then, we can print its value (an address, something like <code class="language-plaintext highlighter-rouge">0x12345678</code>), or print the <em>value at</em> its location with <code class="language-plaintext highlighter-rouge">printf("%i\n", *p);</code>.</li>
+    </ul>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>In our computer’s memory, the variables will look like this:<br>
+<img src="./Lecture 4 - CS50x 2021_files/p.png" alt="grid representing bytes, with four boxes together containing 50 with small 0x123 underneath, and eight boxes together containing 0x123 with small p underneath">
+    <ul class="fa-ul">
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>Since <code class="language-plaintext highlighter-rouge">p</code> is a variable itself, it’s somewhere in memory, and the value stored there is the address of <code class="language-plaintext highlighter-rouge">n</code>.</li>
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>Modern computer systems are “64-bit”, meaning that they use 64 bits to address memory, so a pointer will in reality be 8 bytes, twice as big as an integer of 4 bytes.</li>
+    </ul>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>We can abstract away the actual value of the addresses, since they’ll be different as we declare variables in our programs and not very useful, and simply think of <code class="language-plaintext highlighter-rouge">p</code> as “pointing at” some value:<br>
+<img src="./Lecture 4 - CS50x 2021_files/pointing.png" alt="one box containing p pointing at smaller box containing 50"></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>In the real world, we might have a mailbox labeled “p”, among many mailboxes with addresses. Inside our mailbox, we can put a value like <code class="language-plaintext highlighter-rouge">0x123</code>, which is the address of some other mailbox <code class="language-plaintext highlighter-rouge">n</code>, with the address <code class="language-plaintext highlighter-rouge">0x123</code>.</li>
+</ul>
+
+<a data-id="" id="strings" style="top: -58px;"></a><h2><a data-id="" href="https://cs50.harvard.edu/x/2021/notes/4/#strings">Strings</a></h2>
+
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>A variable declared with <code class="language-plaintext highlighter-rouge">string s = "HI!";</code> will be stored one character at a time in memory. And we can access each character with <code class="language-plaintext highlighter-rouge">s[0]</code>, <code class="language-plaintext highlighter-rouge">s[1]</code>, <code class="language-plaintext highlighter-rouge">s[2]</code>, and <code class="language-plaintext highlighter-rouge">s[3]</code>:<br>
+<img src="./Lecture 4 - CS50x 2021_files/s_array.png" alt="boxes side by side, containing: H labeled s[0], I labeled s[1], ! labeled s[2], \0 labeled s[3]"></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>But it turns out that each character, since it’s stored in memory, <em>also</em> has some unique address, and <code class="language-plaintext highlighter-rouge">s</code> is actually just a pointer with the address of the first character:<br>
+<img src="./Lecture 4 - CS50x 2021_files/s_pointer.png" alt="boxes side by side containing H labeled 0x123, I labeled 0x124, ! labeled 0x125, \0 labeled 0x126"></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>And the variable <code class="language-plaintext highlighter-rouge">s</code> stores the address of the first character of the string. The value <code class="language-plaintext highlighter-rouge">\0</code> is the only indicator of the end of the string:<br>
+<img src="./Lecture 4 - CS50x 2021_files/s_value.png" alt="box containing 0x123 labeled s, boxes side by side containing H labeled 0x123, I labeled 0x124, ! labeled 0x125, \0 labeled 0x126">
+    <ul class="fa-ul">
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>Since the rest of the characters are in an array, back-to-back, we can start at the address in <code class="language-plaintext highlighter-rouge">s</code> and continue reading one character at a time from memory until we reach <code class="language-plaintext highlighter-rouge">\0</code>.</li>
+    </ul>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>Let’s print out a string:
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;cs50.h&gt;
+#include &lt;stdio.h&gt;
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">string</span> <span class="n">s</span> <span class="o">=</span> <span class="s">"HI!"</span><span class="p">;</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">s</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>We can see the value stored in <code class="language-plaintext highlighter-rouge">s</code> with <code class="language-plaintext highlighter-rouge">printf("%p\n", s);</code>, and we see something like <code class="language-plaintext highlighter-rouge">0x4006a4</code> since we’re printing the address in memory of the first character of the string.</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>If we add another line, <code class="language-plaintext highlighter-rouge">printf("%p\n", &amp;s[1]);</code>, we indeed see the next address in memory: <code class="language-plaintext highlighter-rouge">0x4006a5</code>.</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>It turns out that <code class="language-plaintext highlighter-rouge">string s</code> is just a pointer, an address to some character in memory.</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>In fact, the CS50 library defines a type that doesn’t exist in C, <code class="language-plaintext highlighter-rouge">string</code>, as <code class="language-plaintext highlighter-rouge">char *</code>, with <code class="language-plaintext highlighter-rouge">typedef char *string;</code>. The custom type, <code class="language-plaintext highlighter-rouge">string</code>, is defined as just a <code class="language-plaintext highlighter-rouge">char *</code> with <code class="language-plaintext highlighter-rouge">typedef</code>. So <code class="language-plaintext highlighter-rouge">string s = "HI!"</code> is the same as <code class="language-plaintext highlighter-rouge">char *s = "HI!";</code>. And we can use strings in C in the exact same way without the CS50 library, by using <code class="language-plaintext highlighter-rouge">char *</code>.</li>
+</ul>
+
+<a data-id="" id="pointer-arithmetic" style="top: -58px;"></a><h2><a data-id="" href="https://cs50.harvard.edu/x/2021/notes/4/#pointer-arithmetic">Pointer arithmetic</a></h2>
+
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><strong>Pointer arithmetic</strong> is mathematical operations on addresses with pointers.</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>We can print out each character in a string (using <code class="language-plaintext highlighter-rouge">char *</code> directly):
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;stdio.h&gt;
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">char</span> <span class="o">*</span><span class="n">s</span> <span class="o">=</span> <span class="s">"HI!"</span><span class="p">;</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%c</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%c</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%c</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">s</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>But we can go to addresses directly:
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;stdio.h&gt;
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">char</span> <span class="o">*</span><span class="n">s</span> <span class="o">=</span> <span class="s">"HI!"</span><span class="p">;</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%c</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="o">*</span><span class="n">s</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%c</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="o">*</span><span class="p">(</span><span class="n">s</span><span class="o">+</span><span class="mi">1</span><span class="p">));</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%c</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="o">*</span><span class="p">(</span><span class="n">s</span><span class="o">+</span><span class="mi">2</span><span class="p">));</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+    <ul class="fa-ul">
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><code class="language-plaintext highlighter-rouge">*s</code> goes to the address stored in <code class="language-plaintext highlighter-rouge">s</code>, and <code class="language-plaintext highlighter-rouge">*(s+1)</code> goes to the location in memory with an address one byte higher, or the next character. <code class="language-plaintext highlighter-rouge">s[1]</code> is syntactic sugar for <code class="language-plaintext highlighter-rouge">*(s+1)</code>, equivalent in function but more human-friendly to read and write.</li>
+    </ul>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>We can even try to go to addresses in memory that we shouldn’t, like with <code class="language-plaintext highlighter-rouge">*(s+10000)</code>, and when we run our program, we’ll get a <strong>segmentation fault</strong>, or crash as a result of our program touching memory in a segment it shouldn’t have.</li>
+</ul>
+
+<a data-id="" id="compare-and-copy" style="top: -58px;"></a><h2><a data-id="" href="https://cs50.harvard.edu/x/2021/notes/4/#compare-and-copy">Compare and copy</a></h2>
+
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>Let’s try to compare two integers from the user:
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;cs50.h&gt;
+#include &lt;stdio.h&gt;
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">get_int</span><span class="p">(</span><span class="s">"i: "</span><span class="p">);</span>
+    <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">get_int</span><span class="p">(</span><span class="s">"j: "</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="n">j</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"Same</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">else</span>
+    <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"Different</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+    <ul class="fa-ul">
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>We compile and run our program, and it works as we’d expect, with the same values of the two integers giving us “Same” and different values “Different”.</li>
+    </ul>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>When we try to compare two strings, we see that the same inputs are causing our program to print “Different”:
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;cs50.h&gt;
+#include &lt;stdio.h&gt;
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">char</span> <span class="o">*</span><span class="n">s</span> <span class="o">=</span> <span class="n">get_string</span><span class="p">(</span><span class="s">"s: "</span><span class="p">);</span>
+    <span class="kt">char</span> <span class="o">*</span><span class="n">t</span> <span class="o">=</span> <span class="n">get_string</span><span class="p">(</span><span class="s">"t: "</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">s</span> <span class="o">==</span> <span class="n">t</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"Same</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">else</span>
+    <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"Different</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+    <ul class="fa-ul">
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>Even when our inputs are the same, we see “Different” printed.</li>
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>Each “string” is a pointer, <code class="language-plaintext highlighter-rouge">char *</code>, to a different location in memory, where the first character of each string is stored. So even if the characters in the string are the same, this will always print “Different”.</li>
+    </ul>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>For example, our first string might be at address 0x123, our second might be at 0x456, and <code class="language-plaintext highlighter-rouge">s</code> will have the value of <code class="language-plaintext highlighter-rouge">0x123</code>, pointing at that location, and <code class="language-plaintext highlighter-rouge">t</code> will have the value of <code class="language-plaintext highlighter-rouge">0x456</code>, pointing at another location:<br>
+<img src="./Lecture 4 - CS50x 2021_files/s_t.png" alt="box containing 0x123 labeled s, boxes side by side containing H labeled 0x123, I labeled 0x124, ! labeled 0x125, \0 labeled 0x126, box containing 0x456 labeled t, boxes side by side containing H labeled 0x456, I labeled 0x457, ! labeled 0x458, \0 labeled 0x459"></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>And <code class="language-plaintext highlighter-rouge">get_string</code>, this whole time, has been returning just a <code class="language-plaintext highlighter-rouge">char *</code>, or a pointer to the first character of a string from the user. Since we called <code class="language-plaintext highlighter-rouge">get_string</code> twice, we got two different pointers back.</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>Let’s try to copy a string:
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;cs50.h&gt;
+#include &lt;ctype.h&gt;
+#include &lt;stdio.h&gt;
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">char</span> <span class="o">*</span><span class="n">s</span> <span class="o">=</span> <span class="n">get_string</span><span class="p">(</span><span class="s">"s: "</span><span class="p">);</span>
+
+    <span class="kt">char</span> <span class="o">*</span><span class="n">t</span> <span class="o">=</span> <span class="n">s</span><span class="p">;</span>
+
+    <span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">toupper</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+
+    <span class="n">printf</span><span class="p">(</span><span class="s">"s: %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">s</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"t: %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">t</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+    <ul class="fa-ul">
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>We get a string <code class="language-plaintext highlighter-rouge">s</code>, and copy the value of <code class="language-plaintext highlighter-rouge">s</code> into <code class="language-plaintext highlighter-rouge">t</code>. Then, we capitalize the first letter in <code class="language-plaintext highlighter-rouge">t</code>.</li>
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>But when we run our program, we see that both <code class="language-plaintext highlighter-rouge">s</code> and <code class="language-plaintext highlighter-rouge">t</code> are now capitalized.</li>
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>Since we set <code class="language-plaintext highlighter-rouge">s</code> and <code class="language-plaintext highlighter-rouge">t</code> to the same value, or the same address, they’re both pointing to the same character, and so we capitalized the same character in memory!</li>
+    </ul>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>To actually make a copy of a string, we have to do a little more work, and copy each character in <code class="language-plaintext highlighter-rouge">s</code> to somewhere else in memory:
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;cs50.h&gt;
+#include &lt;ctype.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">char</span> <span class="o">*</span><span class="n">s</span> <span class="o">=</span> <span class="n">get_string</span><span class="p">(</span><span class="s">"s: "</span><span class="p">);</span>
+
+    <span class="kt">char</span> <span class="o">*</span><span class="n">t</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="n">strlen</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">strlen</span><span class="p">(</span><span class="n">s</span><span class="p">);</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+    <span class="p">}</span>
+
+    <span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">toupper</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+
+    <span class="n">printf</span><span class="p">(</span><span class="s">"s: %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">s</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"t: %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">t</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+    <ul class="fa-ul">
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>We create a new variable, <code class="language-plaintext highlighter-rouge">t</code>, of the type <code class="language-plaintext highlighter-rouge">char *</code>, with <code class="language-plaintext highlighter-rouge">char *t</code>. Now, we want to point it to a new chunk of memory that’s large enough to store the copy of the string. With <strong><code class="language-plaintext highlighter-rouge">malloc</code></strong>, we <em>allocate</em> some number of bytes in memory (that aren’t already used to store other values), and we pass in the number of bytes we’d like to mark for use. We already know the length of <code class="language-plaintext highlighter-rouge">s</code>, and we add 1 to that for the terminating null character. So, our final line of code is <code class="language-plaintext highlighter-rouge">char *t = malloc(strlen(s) + 1);</code>.</li>
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>Then, we copy each character, one at a time, with a <code class="language-plaintext highlighter-rouge">for</code> loop. We use <code class="language-plaintext highlighter-rouge">i &lt; n + 1</code>, since we actually want to go <em>up to</em> <code class="language-plaintext highlighter-rouge">n</code>, the length of the string, to ensure we copy the terminating character in the string. In the loop, we set <code class="language-plaintext highlighter-rouge">t[i] = s[i]</code>, copying the characters. While we could use <code class="language-plaintext highlighter-rouge">*(t+i) = *(s+i)</code> to the same effect, it’s arguably less readable.</li>
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>Now, we can capitalize just the first letter of <code class="language-plaintext highlighter-rouge">t</code>.</li>
+    </ul>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>We can add some error-checking to our program:
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;cs50.h&gt;
+#include &lt;ctype.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">char</span> <span class="o">*</span><span class="n">s</span> <span class="o">=</span> <span class="n">get_string</span><span class="p">(</span><span class="s">"s: "</span><span class="p">);</span>
+
+    <span class="kt">char</span> <span class="o">*</span><span class="n">t</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="n">strlen</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">t</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">strlen</span><span class="p">(</span><span class="n">s</span><span class="p">);</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">strlen</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">toupper</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+    <span class="p">}</span>
+
+    <span class="n">printf</span><span class="p">(</span><span class="s">"s: %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">s</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"t: %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">t</span><span class="p">);</span>
+
+    <span class="n">free</span><span class="p">(</span><span class="n">t</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+    <ul class="fa-ul">
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>If our computer is out of memory, <code class="language-plaintext highlighter-rouge">malloc</code> will return <code class="language-plaintext highlighter-rouge">NULL</code>, the null pointer, or a special value that indicates there isn’t an address to point to. So we should check for that case, and exit if <code class="language-plaintext highlighter-rouge">t</code> is <code class="language-plaintext highlighter-rouge">NULL</code>.</li>
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>We could also check that <code class="language-plaintext highlighter-rouge">t</code> has a length, before trying to capitalize the first character.</li>
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>Finally, we should <strong>free</strong> the memory we allocated earlier, which marks it as usable again by some other program. We call the <code class="language-plaintext highlighter-rouge">free</code> function and pass in the pointer <code class="language-plaintext highlighter-rouge">t</code>, since we’re done with that chunk of memory. (<code class="language-plaintext highlighter-rouge">get_string</code>, too, calls <code class="language-plaintext highlighter-rouge">malloc</code> to allocate memory for strings, and calls <code class="language-plaintext highlighter-rouge">free</code> just before the <code class="language-plaintext highlighter-rouge">main</code> function returns.)</li>
+    </ul>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>We can actually also use the <code class="language-plaintext highlighter-rouge">strcpy</code> function, from the C’s string library, with <code class="language-plaintext highlighter-rouge">strcpy(t, s);</code> instead of our loop, to copy the string <code class="language-plaintext highlighter-rouge">s</code> into <code class="language-plaintext highlighter-rouge">t</code>.</li>
+</ul>
+
+<a data-id="" id="valgrind" style="top: -58px;"></a><h2><a data-id="" href="https://cs50.harvard.edu/x/2021/notes/4/#valgrind">valgrind</a></h2>
+
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><code class="language-plaintext highlighter-rouge">valgrind</code> is a command-line tool that we can use to run our program and see if it has any <strong>memory leaks</strong>, or memory we’ve allocated without freeing, which might eventually cause out computer to run out of memory.</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>Let’s build a string but allocate less than what we need in <code class="language-plaintext highlighter-rouge">memory.c</code>:
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">char</span> <span class="o">*</span><span class="n">s</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+    <span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="sc">'H'</span><span class="p">;</span>
+    <span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="sc">'I'</span><span class="p">;</span>
+    <span class="n">s</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="sc">'!'</span><span class="p">;</span>
+    <span class="n">s</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="sc">'\0'</span><span class="p">;</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">s</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+    <ul class="fa-ul">
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>We also don’t free the memory we’ve allocated.</li>
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>We’ll run <code class="language-plaintext highlighter-rouge">valgrind ./memory</code> after compiling, and we’ll see a lot of output, but we can run <code class="language-plaintext highlighter-rouge">help50 valgrind ./memory</code> to help explain some of those messages. For this program, we see snippets like “Invalid write of size 1”, “Invalid read of size 1”, and finally “3 bytes in 1 blocks are definitely lost”, with line numbers nearby. Indeed, we’re writing to memory, <code class="language-plaintext highlighter-rouge">s[3]</code>, which is not part of what we originally allocated for <code class="language-plaintext highlighter-rouge">s</code>. And when we print out <code class="language-plaintext highlighter-rouge">s</code>, we’re reading all the way to <code class="language-plaintext highlighter-rouge">s[3]</code> as well. And finally, <code class="language-plaintext highlighter-rouge">s</code> isn’t freed at the end of our program.</li>
+    </ul>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>We can make sure to allocate the right number of bytes, and free memory at the end:
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">char</span> <span class="o">*</span><span class="n">s</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>
+    <span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="sc">'H'</span><span class="p">;</span>
+    <span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="sc">'I'</span><span class="p">;</span>
+    <span class="n">s</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="sc">'!'</span><span class="p">;</span>
+    <span class="n">s</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="sc">'\0'</span><span class="p">;</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">s</span><span class="p">);</span>
+    <span class="n">free</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+    <ul class="fa-ul">
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>Now, <code class="language-plaintext highlighter-rouge">valgrind</code> doesn’t show any warning messages.</li>
+    </ul>
+  </li>
+</ul>
+
+<a data-id="" id="garbage-values" style="top: -58px;"></a><h2><a data-id="" href="https://cs50.harvard.edu/x/2021/notes/4/#garbage-values">Garbage values</a></h2>
+
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>Let’s take a look at the following:
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="o">*</span><span class="n">x</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="o">*</span><span class="n">y</span><span class="p">;</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>
+
+    <span class="o">*</span><span class="n">x</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
+    <span class="o">*</span><span class="n">y</span> <span class="o">=</span> <span class="mi">13</span><span class="p">;</span>
+
+    <span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
+
+    <span class="o">*</span><span class="n">y</span> <span class="o">=</span> <span class="mi">13</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+    <ul class="fa-ul">
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>We declare two pointers to integers, <code class="language-plaintext highlighter-rouge">x</code> and <code class="language-plaintext highlighter-rouge">y</code>, but don’t assign them values. We use <code class="language-plaintext highlighter-rouge">malloc</code> to allocate enough memory for an integer with <code class="language-plaintext highlighter-rouge">sizeof(int)</code>, and store it in <code class="language-plaintext highlighter-rouge">x</code>. <code class="language-plaintext highlighter-rouge">*x = 42</code> goes to the address <code class="language-plaintext highlighter-rouge">x</code> points to, and sets that location in memory to the value 42.</li>
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>With <code class="language-plaintext highlighter-rouge">*y = 13</code>, we’re trying to put the value 13 at the address <code class="language-plaintext highlighter-rouge">y</code> points to. But since we never assigned <code class="language-plaintext highlighter-rouge">y</code> a value, it has a <strong>garbage value</strong>, or whatever unknown value that was in memory, from whatever program was running in our computer before. So when we try to go to the garbage value in <code class="language-plaintext highlighter-rouge">y</code> as an address, we’re going to some unknown address, which is likely to cause a segmentation fault, or segfault.</li>
+    </ul>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>We watch <a href="https://www.youtube.com/watch?v=3uLKjb973HU">Pointer Fun with Binky</a>, an animated video demonstrating the concepts in the code above.</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>We can print out garbage values, by declaring an array but not setting any of its values:
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;stdio.h&gt;
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">scores</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"%i</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">scores</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+    <ul class="fa-ul">
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>When we compile and run this program, we see various values printed.</li>
+    </ul>
+  </li>
+</ul>
+
+<a data-id="" id="swap" style="top: -58px;"></a><h2><a data-id="" href="https://cs50.harvard.edu/x/2021/notes/4/#swap">Swap</a></h2>
+
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>Let’s try to swap the values of two integers.
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;stdio.h&gt;
+</span>
+<span class="kt">void</span> <span class="nf">swap</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">);</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+
+    <span class="n">printf</span><span class="p">(</span><span class="s">"x is %i, y is %i</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span>
+    <span class="n">swap</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"x is %i, y is %i</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">swap</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">tmp</span> <span class="o">=</span> <span class="n">a</span><span class="p">;</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">b</span><span class="p">;</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+    <ul class="fa-ul">
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>In the real world, if we had a red liquid in one glass, and a blue liquid in another, and we wanted to swap them, we would need a third glass to temporarily hold one of the liquids, perhaps the red glass. Then we can pour the blue liquid into the first glass, and finally the red liquid from the temporary glass into the second one.</li>
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>In our <code class="language-plaintext highlighter-rouge">swap</code> function, we have a third variable to use as temporary storage space as well. We put <code class="language-plaintext highlighter-rouge">a</code> into <code class="language-plaintext highlighter-rouge">tmp</code>, and then set <code class="language-plaintext highlighter-rouge">a</code> to the value of <code class="language-plaintext highlighter-rouge">b</code>, and finally <code class="language-plaintext highlighter-rouge">b</code> can be changed to the original value of <code class="language-plaintext highlighter-rouge">a</code>, now in <code class="language-plaintext highlighter-rouge">tmp</code>.</li>
+    </ul>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>But, if we tried to use that function in a program, we don’t see any changes. It turns out that the <code class="language-plaintext highlighter-rouge">swap</code> function gets its own variables, <code class="language-plaintext highlighter-rouge">a</code> and <code class="language-plaintext highlighter-rouge">b</code> when they are passed in, that are copies of <code class="language-plaintext highlighter-rouge">x</code> and <code class="language-plaintext highlighter-rouge">y</code>, and so changing those values don’t change <code class="language-plaintext highlighter-rouge">x</code> and <code class="language-plaintext highlighter-rouge">y</code> in the <code class="language-plaintext highlighter-rouge">main</code> function.</li>
+</ul>
+
+<a data-id="" id="memory-layout" style="top: -58px;"></a><h2><a data-id="" href="https://cs50.harvard.edu/x/2021/notes/4/#memory-layout">Memory layout</a></h2>
+
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>Within our computer’s memory, the different types of data that need to be stored for our program are organized into different sections:<br>
+<img src="./Lecture 4 - CS50x 2021_files/memory_layout.png" alt="Grid with sections, from top to bottom: machine code, globals, heap (with arrow pointing downward), stack (with arrow pointing upward)">
+    <ul class="fa-ul">
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>The <strong>machine code</strong> section is our compiled program’s binary code. When we run our program, that code is loaded into the “top” of memory.</li>
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>Just below, or in the next part of memory, are <strong>global variables</strong> we declare in our program.</li>
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>The <strong>heap</strong> section is an empty area from where <code class="language-plaintext highlighter-rouge">malloc</code> can get free memory for our program to use. As we call <code class="language-plaintext highlighter-rouge">malloc</code>, we start allocating memory from the top down.</li>
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>The <strong>stack</strong> section is used by functions in our program as they are called, and grows upwards. For example, our <code class="language-plaintext highlighter-rouge">main</code> function is at the very bottom of the stack and has the local variables <code class="language-plaintext highlighter-rouge">x</code> and <code class="language-plaintext highlighter-rouge">y</code>. The <code class="language-plaintext highlighter-rouge">swap</code> function, when it’s called, has its own area  of memory that’s on top of <code class="language-plaintext highlighter-rouge">main</code>’s, with the local variables <code class="language-plaintext highlighter-rouge">a</code>, <code class="language-plaintext highlighter-rouge">b</code>, and <code class="language-plaintext highlighter-rouge">tmp</code>:<br>
+<img src="./Lecture 4 - CS50x 2021_files/stack.png" alt="Stack section with (a, b, tmp) labeled swap, above (x, y) labeled main"></li>
+    </ul>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>Once the function <code class="language-plaintext highlighter-rouge">swap</code> returns, the memory it was using is freed for the next function call. <code class="language-plaintext highlighter-rouge">x</code> and <code class="language-plaintext highlighter-rouge">y</code> are arguments, so they’re copied as <code class="language-plaintext highlighter-rouge">a</code> and <code class="language-plaintext highlighter-rouge">b</code> for <code class="language-plaintext highlighter-rouge">swap</code>, so we don’t see our changes back in <code class="language-plaintext highlighter-rouge">main</code>.</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>By passing in the address of <code class="language-plaintext highlighter-rouge">x</code> and <code class="language-plaintext highlighter-rouge">y</code>, our <code class="language-plaintext highlighter-rouge">swap</code> function can actually work:
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;stdio.h&gt;
+</span>
+<span class="kt">void</span> <span class="nf">swap</span><span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="o">*</span><span class="n">b</span><span class="p">);</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+
+    <span class="n">printf</span><span class="p">(</span><span class="s">"x is %i, y is %i</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span>
+    <span class="n">swap</span><span class="p">(</span><span class="o">&amp;</span><span class="n">x</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">y</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"x is %i, y is %i</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">swap</span><span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="o">*</span><span class="n">b</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">tmp</span> <span class="o">=</span> <span class="o">*</span><span class="n">a</span><span class="p">;</span>
+    <span class="o">*</span><span class="n">a</span> <span class="o">=</span> <span class="o">*</span><span class="n">b</span><span class="p">;</span>
+    <span class="o">*</span><span class="n">b</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+    <ul class="fa-ul">
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>The addresses of <code class="language-plaintext highlighter-rouge">x</code> and <code class="language-plaintext highlighter-rouge">y</code> are passed in from <code class="language-plaintext highlighter-rouge">main</code> to <code class="language-plaintext highlighter-rouge">swap</code> with <code class="language-plaintext highlighter-rouge">&amp;x</code> and <code class="language-plaintext highlighter-rouge">&amp;y</code>, and we use the <code class="language-plaintext highlighter-rouge">int *a</code> syntax to declare that our <code class="language-plaintext highlighter-rouge">swap</code> function takes in pointers. We save the value of <code class="language-plaintext highlighter-rouge">x</code> to <code class="language-plaintext highlighter-rouge">tmp</code> by following the pointer <code class="language-plaintext highlighter-rouge">a</code>, and then take the value of <code class="language-plaintext highlighter-rouge">y</code> by following the pointer <code class="language-plaintext highlighter-rouge">b</code>, and store that to the location <code class="language-plaintext highlighter-rouge">a</code> is pointing to (<code class="language-plaintext highlighter-rouge">x</code>). Finally, we store the value of <code class="language-plaintext highlighter-rouge">tmp</code> to the location pointed to by <code class="language-plaintext highlighter-rouge">b</code> (<code class="language-plaintext highlighter-rouge">y</code>), and we’re done:<br>
+<img src="./Lecture 4 - CS50x 2021_files/swap.png" alt="Stack section with (tmp, a, b) labeled swap, above (x, y) labeled main, with a and b pointing to x and y"></li>
+    </ul>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>If we call <code class="language-plaintext highlighter-rouge">malloc</code> for too much memory, we will have a <strong>heap overflow</strong>, since we end up going past our heap. Or, if we call too many functions without returning from them, we will have a <strong>stack overflow</strong>, where our stack has too much memory allocated as well.</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>Let’s implement drawing Mario’s pyramid, by calling a function:
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;cs50.h&gt;
+#include &lt;stdio.h&gt;
+</span>
+<span class="kt">void</span> <span class="nf">draw</span><span class="p">(</span><span class="kt">int</span> <span class="n">h</span><span class="p">);</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">height</span> <span class="o">=</span> <span class="n">get_int</span><span class="p">(</span><span class="s">"Height: "</span><span class="p">);</span>
+    <span class="n">draw</span><span class="p">(</span><span class="n">height</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">draw</span><span class="p">(</span><span class="kt">int</span> <span class="n">h</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">h</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="n">i</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">"#"</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>We can change <code class="language-plaintext highlighter-rouge">draw</code> to be recursive:
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">draw</span><span class="p">(</span><span class="kt">int</span> <span class="n">h</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">draw</span><span class="p">(</span><span class="n">h</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">h</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"#"</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+    <ul class="fa-ul">
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>When we try to compile this with <code class="language-plaintext highlighter-rouge">make</code>, we see a warning that the <code class="language-plaintext highlighter-rouge">draw</code> function will call itself recursively without stopping. So we’ll use <code class="language-plaintext highlighter-rouge">clang</code> without the extra checks, and when we run this program, we get a segmentation fault right away. <code class="language-plaintext highlighter-rouge">draw</code> is calling itself over and over, and we ran out of memory on the stack.</li>
+    </ul>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>By adding a base case, the <code class="language-plaintext highlighter-rouge">draw</code> function will stop calling itself at some point:
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">draw</span><span class="p">(</span><span class="kt">int</span> <span class="n">h</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">h</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">draw</span><span class="p">(</span><span class="n">h</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">h</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"#"</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+    <ul class="fa-ul">
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>But if we enter a large enough value for the height, like <code class="language-plaintext highlighter-rouge">2000000000</code>, we’ll still run out of memory, since we’re calling <code class="language-plaintext highlighter-rouge">draw</code> too many times without returning.</li>
+    </ul>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>A <strong>buffer overflow</strong> occurs when we go past the end of a buffer, some chunk of memory we’ve allocated like an array, and access memory we shouldn’t be.</li>
+</ul>
+
+<a data-id="" id="scanf" style="top: -58px;"></a><h2><a data-id="" href="https://cs50.harvard.edu/x/2021/notes/4/#scanf">scanf</a></h2>
+
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>We can implement <code class="language-plaintext highlighter-rouge">get_int</code> ourselves with a C library function, <code class="language-plaintext highlighter-rouge">scanf</code>:
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;stdio.h&gt;
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">x</span><span class="p">;</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"x: "</span><span class="p">);</span>
+    <span class="n">scanf</span><span class="p">(</span><span class="s">"%i"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"x: %i</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+    <ul class="fa-ul">
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><code class="language-plaintext highlighter-rouge">scanf</code> takes a format, <code class="language-plaintext highlighter-rouge">%i</code>, so the input is “scanned” for that format. We also pass in the address in memory where we want that input to go. But <code class="language-plaintext highlighter-rouge">scanf</code> doesn’t have much error checking, so we might not get an integer.</li>
+    </ul>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>We can try to get a string the same way:
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;stdio.h&gt;
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">char</span> <span class="o">*</span><span class="n">s</span><span class="p">;</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"s: "</span><span class="p">);</span>
+    <span class="n">scanf</span><span class="p">(</span><span class="s">"%s"</span><span class="p">,</span> <span class="n">s</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"s: %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">s</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+    <ul class="fa-ul">
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>But we haven’t actually allocated any memory for <code class="language-plaintext highlighter-rouge">s</code>, so we need to call <code class="language-plaintext highlighter-rouge">malloc</code> to allocate memory for characters for our string. We could also use <code class="language-plaintext highlighter-rouge">char s[4];</code> to declare an array of four characters. Then, <code class="language-plaintext highlighter-rouge">s</code> will be treated as a pointer to the first character in <code class="language-plaintext highlighter-rouge">scanf</code> and <code class="language-plaintext highlighter-rouge">printf</code>.</li>
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>Now, if the user types in a string of length 3 or less, our program will work safely. But if the user types in a longer string, <code class="language-plaintext highlighter-rouge">scanf</code> might be trying to write past the end of our array into unknown memory, causing our program to crash.</li>
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><code class="language-plaintext highlighter-rouge">get_string</code> from the CS50 library continuously allocates more memory as <code class="language-plaintext highlighter-rouge">scanf</code> reads in more characters, so it doesn’t have that issue.</li>
+    </ul>
+  </li>
+</ul>
+
+<a data-id="" id="files" style="top: -58px;"></a><h2><a data-id="" href="https://cs50.harvard.edu/x/2021/notes/4/#files">Files</a></h2>
+
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>With the ability to use pointers, we can also open files, like a digital phone book:
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;cs50.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">FILE</span> <span class="o">*</span><span class="n">file</span> <span class="o">=</span> <span class="n">fopen</span><span class="p">(</span><span class="s">"phonebook.csv"</span><span class="p">,</span> <span class="s">"a"</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">file</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kt">char</span> <span class="o">*</span><span class="n">name</span> <span class="o">=</span> <span class="n">get_string</span><span class="p">(</span><span class="s">"Name: "</span><span class="p">);</span>
+    <span class="kt">char</span> <span class="o">*</span><span class="n">number</span> <span class="o">=</span> <span class="n">get_string</span><span class="p">(</span><span class="s">"Number: "</span><span class="p">);</span>
+
+    <span class="n">fprintf</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="s">"%s,%s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">number</span><span class="p">);</span>
+
+    <span class="n">fclose</span><span class="p">(</span><span class="n">file</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+    <ul class="fa-ul">
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span><code class="language-plaintext highlighter-rouge">fopen</code> is a new function we can use to open a file. It will return a pointer to a new type, <code class="language-plaintext highlighter-rouge">FILE</code>, that we can read from and write to. The first argument is the name of the file, and the second argument is the mode we want to open the file in (<code class="language-plaintext highlighter-rouge">r</code> for read, <code class="language-plaintext highlighter-rouge">w</code> for write, and <code class="language-plaintext highlighter-rouge">a</code> for append, or adding to).</li>
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>We’ll add a check to exit if we couldn’t open the file for some reason.</li>
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>After we get some strings, we can use <code class="language-plaintext highlighter-rouge">fprintf</code> to print to a file.</li>
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>Finally, we close the file with <code class="language-plaintext highlighter-rouge">fclose</code>.</li>
+    </ul>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>Now we can create our own CSV files, a file of comma-separated values (like a mini-spreadsheet), programmatically.</li>
+</ul>
+
+<a data-id="" id="graphics" style="top: -58px;"></a><h1><a data-id="" href="https://cs50.harvard.edu/x/2021/notes/4/#graphics">Graphics</a></h1>
+
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>We can read in binary and map them to pixels and colors, to display images and videos. With a finite number of bits in an image file, though, we can only zoom in so far before we start seeing individual pixels.
+    <ul class="fa-ul">
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>With artificial intelligence and machine learning, however, we can use algorithms that can generate additional details that weren’t there before, by guessing based on other data.</li>
+    </ul>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>Let’s look at a program that opens a file and tells us if it’s a JPEG file, an image file in a particular format:
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;stdint.h&gt;
+#include &lt;stdio.h&gt;
+</span>
+<span class="k">typedef</span> <span class="kt">uint8_t</span> <span class="n">BYTE</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+    <span class="c1">// Check usage</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Open file</span>
+    <span class="kt">FILE</span> <span class="o">*</span><span class="n">file</span> <span class="o">=</span> <span class="n">fopen</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s">"r"</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">file</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Read first three bytes</span>
+    <span class="n">BYTE</span> <span class="n">bytes</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+    <span class="n">fread</span><span class="p">(</span><span class="n">bytes</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">BYTE</span><span class="p">),</span> <span class="mi">3</span><span class="p">,</span> <span class="n">file</span><span class="p">);</span>
+
+    <span class="c1">// Check first three bytes</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">bytes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mh">0xff</span> <span class="o">&amp;&amp;</span> <span class="n">bytes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mh">0xd8</span> <span class="o">&amp;&amp;</span> <span class="n">bytes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="mh">0xff</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"Maybe</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">else</span>
+    <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"No</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Close file</span>
+    <span class="n">fclose</span><span class="p">(</span><span class="n">file</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+    <ul class="fa-ul">
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>First, we define a <code class="language-plaintext highlighter-rouge">BYTE</code> as 8 bits, so we can refer to a byte as a type more easily in C.</li>
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>Then, we try to open a file (checking that we indeed get a non-NULL file back), and read the first three bytes from the file with <code class="language-plaintext highlighter-rouge">fread</code>, into a buffer called <code class="language-plaintext highlighter-rouge">bytes</code>.</li>
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>We can compare the first three bytes (in hexadecimal) to the three bytes required to begin a JPEG file. If they’re the same, then our file is likely to be a JPEG file (though, other types of files may still begin with those bytes). But if they’re not the same, we know it’s definitely not a JPEG file.</li>
+    </ul>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>We can even copy files ourselves, one byte at a time now:
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;stdint.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+</span>
+<span class="k">typedef</span> <span class="kt">uint8_t</span> <span class="n">BYTE</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+    <span class="c1">// Ensure proper usage</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">!=</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">"Usage: copy SOURCE DESTINATION</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// open input file</span>
+    <span class="kt">FILE</span> <span class="o">*</span><span class="n">source</span> <span class="o">=</span> <span class="n">fopen</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s">"r"</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">source</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"Could not open %s.</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Open output file</span>
+    <span class="kt">FILE</span> <span class="o">*</span><span class="n">destination</span> <span class="o">=</span> <span class="n">fopen</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="s">"w"</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">destination</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">fclose</span><span class="p">(</span><span class="n">source</span><span class="p">);</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"Could not create %s.</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Copy source to destination, one BYTE at a time</span>
+    <span class="n">BYTE</span> <span class="n">buffer</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">fread</span><span class="p">(</span><span class="o">&amp;</span><span class="n">buffer</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">BYTE</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="n">source</span><span class="p">))</span>
+    <span class="p">{</span>
+        <span class="n">fwrite</span><span class="p">(</span><span class="o">&amp;</span><span class="n">buffer</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">BYTE</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="n">destination</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Close files</span>
+    <span class="n">fclose</span><span class="p">(</span><span class="n">source</span><span class="p">);</span>
+    <span class="n">fclose</span><span class="p">(</span><span class="n">destination</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+    <ul class="fa-ul">
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>We use <code class="language-plaintext highlighter-rouge">argv</code> to get arguments, using them as filenames to open files to read from and one to write to.</li>
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>Then, we read one byte from the <code class="language-plaintext highlighter-rouge">source</code> file into a buffer, and write that byte to the <code class="language-plaintext highlighter-rouge">destination</code> file. We can use a <code class="language-plaintext highlighter-rouge">while</code> loop to call <code class="language-plaintext highlighter-rouge">fread</code>, which will stop once there are no more bytes to read.</li>
+    </ul>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-circle"></i></span>We can use these abilities to read and write files, recovering images from a file, and adding filters to images by changing the bytes in them, in this week’s problem set!</li>
+</ul>
+
+
+                </main>
+
+            </div>
+
+        </div>
+
+        
+ 
+        <script src="./Lecture 4 - CS50x 2021_files/page.js.download"></script>
+
+    
+
+
+</body></html>
